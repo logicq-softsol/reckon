@@ -4,18 +4,13 @@
 			'LoginController',
 			[
 			 '$scope',
-			 '$rootScope',
-			 '$http',
 			 '$location',
-			 '$localStorage',
 			 '$exceptionHandler',
-			 'AuthenticationService',
-			 function($scope,$rootScope,$http,$location,$localStorage,$exceptionHandler,AuthenticationService) {
+			 'LoginService',
+			 function($scope,$location,$exceptionHandler,LoginService) {
 
-		$scope.password={};
-		$scope.request={};
 		$scope.login = function () {
-			AuthenticationService.Login($scope).success(function(response, status, headers, config){
+			LoginService.Login($scope).success(function(response, status, headers, config){
 				$location.path('/dashboard');
 			}).error(function(response, status) {
 				var errormsg='Unable to Login Check setting or Loging Details '+' Status Code : '+status;

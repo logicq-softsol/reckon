@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +20,17 @@ import com.logicq.reckon.service.EventService;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/api/event")
+@RequestMapping("/api")
 public class EventController {
 
 	@Autowired
 	EventService eventService;
 
-	@RequestMapping(value = "/recived", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	 @MessageMapping("/event")
+	  @SendTo("/topic/message")
 	public ResponseEntity<Event> recivedEvent(@RequestBody Event event) {
 		System.out.println("called to post "+event);
-		eventService.saveEvent(event);
+		//eventService.saveEvent(event);
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
 

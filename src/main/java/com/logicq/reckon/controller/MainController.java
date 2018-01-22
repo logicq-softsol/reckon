@@ -1,9 +1,13 @@
 package com.logicq.reckon.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +19,17 @@ import com.logicq.reckon.model.UserDetails;
 @RequestMapping("/api")
 public class MainController {
 
-	@RequestMapping(value = "/login",  method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@Autowired
+	HttpServletRequest request;
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDetails> login() {
-		UserDetails user=new UserDetails();
+		String username = (String) request.getHeader("username");
+		String password = (String) request.getHeader("password");
+		UserDetails user = new UserDetails();
 		user.setMobileNo("7057014118");
-		user.setUsername("Demo");
+		user.setUsername(username);
+		System.out.println(" User Name : " + username + " Password : " + password);
 		return new ResponseEntity<UserDetails>(user, HttpStatus.OK);
 	}
 
