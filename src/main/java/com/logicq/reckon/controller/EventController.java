@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logicq.reckon.model.Event;
-import com.logicq.reckon.service.EventService;
+import com.logicq.reckon.service.EventServiceImpl;
 
 @RestController
 @EnableAutoConfiguration
@@ -24,25 +24,27 @@ import com.logicq.reckon.service.EventService;
 public class EventController {
 
 	@Autowired
-	EventService eventService;
+	EventServiceImpl eventServiceImpl;
 
-	 @MessageMapping("/event")
-	  @SendTo("/topic/message")
-	public ResponseEntity<Event> recivedEvent(@RequestBody Event event) {
-		System.out.println("called to post "+event);
-		//eventService.saveEvent(event);
+	
+
+	@RequestMapping(value = "/eventclicked", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Event> clickedEvent(@RequestBody Event event) {
+		System.out.println(" Event recived for click : "+event);
+		eventServiceImpl.saveEvent(event);
+		eventServiceImpl.sendMessage(event);
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/allEvents", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Event>> getAllEvents() throws Exception {
-		List<Event> eventList = eventService.findAllEvent();
+		List<Event> eventList = eventServiceImpl.findAllEvent();
 		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/events/{status}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Event>> getEventsAccordingToStatus(@PathVariable String status) throws Exception {
-		List<Event> eventList = eventService.findAllEvent();
+		List<Event> eventList = eventServiceImpl.findAllEvent();
 		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
 	}
 

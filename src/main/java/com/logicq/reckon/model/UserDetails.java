@@ -27,6 +27,9 @@ public class UserDetails {
 
 	@Column(name = "mobile_no")
 	private String mobileNo;
+	
+	@Column(name = "active")
+	private boolean isActive;
 
 	public Long getId() {
 		return id;
@@ -68,12 +71,19 @@ public class UserDetails {
 		this.mobileNo = mobileNo;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDetails [id=" + id + ", username=" + username + ", address=" + address + ", contactNo=" + contactNo
-				+ ", mobileNo=" + mobileNo + "]";
+				+ ", mobileNo=" + mobileNo + ", isActive=" + isActive + "]";
 	}
-	
 	
 
 }

@@ -1,6 +1,6 @@
 package com.logicq.reckon.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,18 +11,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "EVENT")
-public class Event {
+public class Event implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 364840974712227316L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "eventid",nullable = false)
+	@Column(name = "eventid", nullable = false)
 	private String eventId;
 
-	@Column(name = "date",nullable = false)
-	private Date date;
+	@Column(name = "date", nullable = false)
+	private String date;
+
+	@Column(name = "status", nullable = false)
+	private boolean isActive;
 
 	public Long getId() {
 		return id;
@@ -40,19 +48,26 @@ public class Event {
 		this.eventId = eventId;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", eventId=" + eventId + ", date=" + date + "]";
+		return "Event [id=" + id + ", eventId=" + eventId + ", date=" + date + ", isActive=" + isActive + "]";
 	}
 
-	
-	
+
 }

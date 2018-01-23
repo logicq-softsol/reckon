@@ -6,11 +6,19 @@
 			 '$scope',
 			 '$location',
 			 '$exceptionHandler',
+			 '$websocket'
 			 'EventService',
-			 function($scope,$location,$exceptionHandler,EventService) {
+			 function($scope,$location,$exceptionHandler,$websocket,EventService) {
 				 $scope.messages = [];
-				 EventService.receive().then(null, null, function(message) {
-				      $scope.messages.push(message);
-				    });
+				 var ws = $websocket.$new('ws://localhost:8080/reckon/websocket');
+				 ws.onmessage = function(message) {
+				        listener(JSON.parse(message.data));
+				    };
+				 
+				    function listener(data) {
+				        var messageObj = data;
+				        console.log("Received data from websocket: ", messageObj);
+				      }
+				    
 			 } ]);
 }());
