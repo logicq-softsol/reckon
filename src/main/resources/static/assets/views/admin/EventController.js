@@ -6,19 +6,27 @@
 			 '$scope',
 			 '$location',
 			 '$exceptionHandler',
-			 '$websocket'
-			 'EventService',
-			 function($scope,$location,$exceptionHandler,$websocket,EventService) {
-				 $scope.messages = [];
-				 var ws = $websocket.$new('ws://localhost:8080/reckon/websocket');
-				 ws.onmessage = function(message) {
-				        listener(JSON.parse(message.data));
-				    };
-				 
-				    function listener(data) {
-				        var messageObj = data;
-				        console.log("Received data from websocket: ", messageObj);
-				      }
-				    
+			 function($scope,$location,$exceptionHandler) {
+					var stompClient = null;
+					$scope.connect = function ()  {
+					    var socket = new SockJS('/reckon');
+					    stompClient = Stomp.over(socket);
+					    stompClient.connect({}, function (frame) {
+					        stompClient.subscribe('/topics/event', function (data) {
+					        	 console.log('Connected: ' + data);
+					        });
+					    });
+					}
+					
+					$scope.disconnect = function ()  {
+					    if (stompClient !== null) {
+					        stompClient.disconnect();
+					    }
+					    setConnected(false);
+					    console.log("Disconnected");
+					}
+					
+						$scope.connect();
+					
 			 } ]);
 }());

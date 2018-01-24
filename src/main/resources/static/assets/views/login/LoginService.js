@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	angular.module('mlmlogicq').factory('AuthenticationService', ['$http','AppConstants',function ($http,AppConstants ){
+	angular.module('reckonApp').factory('LoginService', ['$http','AppConstants',function ($http,AppConstants ){
 
 		return {
 
@@ -15,22 +15,7 @@
 					data : ''
 				})
 			},
-			   
-			LoadUser:function ($scope) {
-				return  $http({
-					method: 'GET',
-					url:AppConstants.hostName+AppConstants.loadDefaultUserURL,
-					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loadDefaultUserURL,
-					dataType :'json',
-					data : ''
-				})
-			},
-			setAuthenticationToken: function (token,username) {
-				$sessionStorage.authToken = token;
-                $sessionStorage.username=username;
-			    },
-
-
+		
 		}
 	}]);
 }());

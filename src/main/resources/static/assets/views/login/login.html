@@ -1,18 +1,27 @@
-
-
-<div class="pagewarp">
-<div id="login-titile">  <img src="assets/images/login-icon.png" alt=""></div>
-<div class="form-cont"> 
- <form role=form  ng-submit="login()"> 
-	<input type="text" class="user" placeholder="User Name" ng-model="username" name="username" required />
-    <input type="password" class="user" placeholder="Password"  ng-model="password" name="password" required/>
-    <button type=submit class="btn login-btn" id="login" value="Login">Log In</button>
-    <p class="reset-pass"><a href="#"> Reset Password </a> </p>
- </form> 
+<div class="container">
+	<div class="row">
+    
+    <div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">RECKON Login</h1>
+    <form role=form  ng-submit="login()">
+      <div class="input-container">
+        <input type="text" required ng-model="username" id="username" name="username"  required="required"/>
+        <label for="username">Username</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password"   ng-model="password" id="password" name="password"   required="required"/>
+        <label for="password">Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+       <button type="submit"  name="action">  LOGIN</button>
+      </div>
+      <div class="footer"><a href="#">Forgot your password?</a></div>
+  </form> 
+  </div>
+  </div>
 </div>
-
 </div>
-<div class="bott-logo">
-<img src="assets/images/bt-bottom-logo.png" alt="">
-</div>
-

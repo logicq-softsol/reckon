@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     
-   angular.module('reckonApp', ['ui.router','ngWebsocket']).constant('AppConstants', {
+   angular.module('reckonApp', ['ui.router']).constant('AppConstants', {
       'hostName':'http://127.0.0.1:8080/', 
      //'hostName':'http://getpay.co.in',
 	 //'hostName':'http://45.113.136.130:8167',
@@ -14,7 +14,7 @@
 	//   'applicationName' : '/mlmlogicq' ,
 	   'get' : 'GET' ,  
 	   'post' : 'POST' , 
-	   'loginURL' : '/api/login'
+	   'loginURL' : 'api/login'
 	}).directive('ngConfirmClick', [
 	                                   function(){
 	                                       return {

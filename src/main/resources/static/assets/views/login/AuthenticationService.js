@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	angular.module('reckonApp').factory('AuthenticationService', ['$http','AppConstants','$sessionStorage',function ($http,AppConstants,$sessionStorage ){
+	angular.module('reckonApp').factory('AuthenticationService', ['$http','AppConstants',function ($http,AppConstants){
 
 		return {
 
