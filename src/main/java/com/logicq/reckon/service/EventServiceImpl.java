@@ -21,10 +21,14 @@ public class EventServiceImpl implements EventService {
 	@Autowired
 	SimpMessagingTemplate brokerMessagingTemplate;
 
+	@Autowired
+	InventoryService inventoryService;
+	
 	@Transactional
 	public void saveEvent(Event event) {
-		System.out.println(" Event recived before insert : " + event);
 		eventRepository.saveAndFlush(event);
+	
+		sendMessage(event);
 	}
 
 	@Transactional(readOnly = true)
@@ -39,8 +43,8 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void sendMessage(Event event) {
-		brokerMessagingTemplate.convertAndSend("/topics/event", JSON.toJSONString(event, SerializerFeature.BrowserCompatible));
-		System.out.println(" message Send to /topics/event "+event);
+		brokerMessagingTemplate.convertAndSend("/topics/event",
+				JSON.toJSONString(event, SerializerFeature.BrowserCompatible));
 	}
 
 }

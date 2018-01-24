@@ -26,7 +26,7 @@
 					    console.log("Disconnected");
 					}
 					
-						$scope.connect();
+					$scope.connect();		
 					
 			 } ]);
 }());
