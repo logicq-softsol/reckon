@@ -1,27 +1,28 @@
-<div class="container">
-	<div class="row">
-    
-    <div class="container">
-  <div class="card"></div>
-  <div class="card">
-    <h1 class="title">RECKON Login</h1>
-    <form role=form  ng-submit="login()">
-      <div class="input-container">
-        <input type="text" required ng-model="username" id="username" name="username"  required="required"/>
-        <label for="username">Username</label>
-        <div class="bar"></div>
-      </div>
-      <div class="input-container">
-        <input type="password"   ng-model="password" id="password" name="password"   required="required"/>
-        <label for="password">Password</label>
-        <div class="bar"></div>
-      </div>
-      <div class="button-container">
-       <button type="submit"  name="action">  LOGIN</button>
-      </div>
-      <div class="footer"><a href="#">Forgot your password?</a></div>
-  </form> 
-  </div>
-  </div>
-</div>
-</div>
+ <md-content  layout="row" layout-align="space-around" layout-padding="layout-padding" class="login-form">
+      <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Login Form</span></h2>
+          </div>
+        </md-toolbar>
+        <md-card-content>
+          <form name="loginform" ng-submit="login()">
+            <md-input-container class="md-block">
+              <label>Login</label>
+              <input type="text" name="username" ng-model="username" placeholder="login" required=""/>
+              <div ng-messages="loginform.username.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Please enter your User name</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input type="password" name="password" ng-model="password" placeholder="password" required="" />
+              <div ng-messages="loginform.password.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">Please enter your password.</div>
+              </div>
+            </md-input-container>
+            <md-button ng-disabled="!loginform.$valid" type="submit"  name="action" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+          </form>
+        </md-card-content>
+      </md-card>
+    </md-content>

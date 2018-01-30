@@ -17,6 +17,9 @@ public interface InventoryService {
 	List<TableInventory> getNotLinkedTables();
 
 	List<TableInventory> getLinkedTables();
-      
+
+	TableInventory getByTableid(Long reckonid);
 	
+	TableInventory getByReckonid(Long tableid);
+
 }

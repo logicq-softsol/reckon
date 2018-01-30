@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.logicq.reckon.model.Event;
-import com.logicq.reckon.service.EventService;
-import com.logicq.reckon.service.InventoryService;
+import com.logicq.reckon.model.TableStatus;
+import com.logicq.reckon.service.TableStatusService;
+import com.logicq.reckon.vo.EventVO;
 
 @RestController
 @EnableAutoConfiguration
@@ -23,26 +23,24 @@ import com.logicq.reckon.service.InventoryService;
 public class EventController {
 
 	@Autowired
-	EventService eventService;
-
-
+	TableStatusService tableStatusService;
 
 	@RequestMapping(value = "/eventclicked", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Event> clickedEvent(@RequestBody Event event) {
-		eventService.saveEvent(event);
-		return new ResponseEntity<Event>(event, HttpStatus.OK);
+	public ResponseEntity<EventVO> clickedEvent(@RequestBody EventVO eventVO) {
+		tableStatusService.saveEvent(eventVO);
+		return new ResponseEntity<EventVO>(eventVO, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/allEvents", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Event>> getAllEvents() throws Exception {
-		List<Event> eventList = eventService.findAllEvent();
-		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
+	public ResponseEntity<List<TableStatus>> getAllEvents() throws Exception {
+		List<TableStatus> eventList = tableStatusService.findAllEvent();
+		return new ResponseEntity<List<TableStatus>>(eventList, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/events/{status}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Event>> getEventsAccordingToStatus(@PathVariable String status) throws Exception {
-		List<Event> eventList = eventService.findAllEvent();
-		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
+	public ResponseEntity<List<TableStatus>> getEventsAccordingToStatus(@PathVariable String status) throws Exception {
+		List<TableStatus> eventList = tableStatusService.findAllEvent();
+		return new ResponseEntity<List<TableStatus>>(eventList, HttpStatus.OK);
 	}
 
 }

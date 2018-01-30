@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +21,7 @@ public class TableInventory implements Serializable {
 	private Long tableid;
 
 	@Column(name = "DEVICE_ID")
-	private Long deviceid;
+	private Long reckonid;
 
 	@Column(name = "COMMENTS")
 	private String comments;
@@ -35,12 +34,12 @@ public class TableInventory implements Serializable {
 		this.tableid = tableid;
 	}
 
-	public Long getDeviceid() {
-		return deviceid;
+	public Long getReckonid() {
+		return reckonid;
 	}
 
-	public void setDeviceid(Long deviceid) {
-		this.deviceid = deviceid;
+	public void setReckonid(Long reckonid) {
+		this.reckonid = reckonid;
 	}
 
 	public String getComments() {
@@ -53,9 +52,9 @@ public class TableInventory implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TableInventory [tableid=" + tableid + ", deviceid=" + deviceid + ", comments=" + comments + "]";
+		return "TableInventory [tableid=" + tableid + ", reckonid=" + reckonid + ", comments=" + comments + "]";
 	}
-	
+
 	
 	
 

@@ -51,4 +51,16 @@ public class InventoryServiceImpl implements InventoryService {
 		return inventoryRepository.linkedTables();
 	}
 
+	@Override
+	@Transactional
+	public TableInventory getByTableid(Long reckonid) {
+		return inventoryRepository.findByReckonid(reckonid);
+	}
+
+	@Override
+	@Transactional
+	public TableInventory getByReckonid(Long tableid) {
+		return inventoryRepository.findByTableid(tableid);
+	}
+
 }

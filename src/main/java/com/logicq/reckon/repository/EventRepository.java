@@ -8,4 +8,5 @@ import com.logicq.reckon.model.Event;
 @Transactional
 public interface EventRepository extends JpaRepository<Event, String> {
 
+
 }

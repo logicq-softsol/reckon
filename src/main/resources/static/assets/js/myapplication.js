@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     
-   angular.module('reckonApp', ['ui.router']).constant('AppConstants', {
+   angular.module('reckonApp', ['ui.router','ngMaterial']).constant('AppConstants', {
       'hostName':'http://127.0.0.1:8080/', 
      //'hostName':'http://getpay.co.in',
 	 //'hostName':'http://45.113.136.130:8167',
