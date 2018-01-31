@@ -37,7 +37,6 @@ public class AdminController {
 		user.setMobileNo("7057014118");
 		user.setUsername(username);
 		user.setActive(Boolean.TRUE);
-		System.out.println(" User Name : " + username + " Password : " + password);
 		return new ResponseEntity<UserDetails>(user, HttpStatus.OK);
 	}
 

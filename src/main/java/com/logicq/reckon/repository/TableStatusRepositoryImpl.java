@@ -1,6 +1,5 @@
 package com.logicq.reckon.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.logicq.reckon.model.TableInventory;
 import com.logicq.reckon.model.TableStatus;
 
 @Repository
@@ -23,7 +21,7 @@ public class TableStatusRepositoryImpl implements TableStatusQueryRepository {
 	@Override
 	public List<TableStatus> getBusyTables() {
 		Query query = entityManager.createQuery(
-				"SELECT TI FROM TableStatus TI WHERE TI.status IN ('RE','RM','RC','CA')", TableStatus.class);
+				"SELECT TI FROM TableStatus TI WHERE TI.status IN ('SR','SRC','SRM')", TableStatus.class);
 		return query.getResultList();
 	}
 

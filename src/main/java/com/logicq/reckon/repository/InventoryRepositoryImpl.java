@@ -27,7 +27,7 @@ public class InventoryRepositoryImpl implements InventoryQueryRepository {
 
 	@Override
 	public List<TableInventory> linkedTables() {
-		Query query = entityManager.createQuery("SELECT TI FROM TableInventory TI WHERE TI.deviceid!=NULL",
+		Query query = entityManager.createQuery("SELECT TI FROM TableInventory TI WHERE TI.reckonid!=NULL",
 				TableInventory.class);
 		return query.getResultList();
 	}

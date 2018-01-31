@@ -9,8 +9,12 @@
 			 '$interval',
 			 '$exceptionHandler',
 			 function($scope,$rootScope,$location,$interval,$exceptionHandler) {
-				 $scope.grid = [];
-				 $scope.sr = {};
+				 $scope.tableListSR = [];
+				 $scope.tableListSRM = [];
+				 $scope.tableListSRC = [];
+				 $scope.tableListSC = [];
+				 $scope.tableListYL = [];
+				 $scope.displayData={};
 				 
 					var stompClient = null;
 					$scope.connect = function ()  {
@@ -18,7 +22,32 @@
 					    stompClient = Stomp.over(socket);
 					    stompClient.connect({}, function (frame) {
 					        stompClient.subscribe('/topics/event', function (data) {
-					        	 $scope.grid.push(data.body);
+					        	 $scope.displayData= JSON.parse(data.body);
+					        	 $scope.tableListSR = [];
+								 $scope.tableListSRM = [];
+								 $scope.tableListSRC = [];
+					        	 angular.forEach($scope.displayData, function(value, key){
+					        		 var item = {}
+					        		 item ["value"] = key;
+					        		 if("SRC" == value){
+					        			 item ["status"] = "md-accent";
+						        		 $scope.tableListSRC.push(item);
+					        		 } else if("SRM"== value){
+					        			  item ["status"] = "md-warn";
+						        		  $scope.tableListSRM.push(item);
+					        		 }else if("SR"== value){
+					        			 item ["status"] = "md-hue-1";
+						        		  $scope.tableListSR.push(item);
+					        		 }
+					        		 else if("SC"== value){
+					        			 item ["status"] = "md-hue-1";
+						        		  $scope.tableListSC.push(item);
+					        		 }else{
+					        			 item ["status"] = "md-hue-1";
+						        		  $scope.tableListYL.push(item); 
+					        		 }
+					        	    
+					        	   });
 					        	 $rootScope.$apply(); 
 					        });
 					    });
@@ -33,24 +62,9 @@
 					}
 					
 					$scope.connect();	
+			
 					
-					$scope.updateStatus= function($interval) {
-					      var self = this;
-					      self.srValue = 10;
-
-					      // Iterate every 100ms, non-stop and increment
-					      // the Determinate loader.
-					      $interval(function() {
-					    	 var self = this;
-					        self.srValue += 1;
-					        if (self.srValue > 60) {
-					          self.srValue = 10;
-					        }
-
-					      }, 60);
-					    }
-					
-				
+					 
 					
 			 } ]);
 }());

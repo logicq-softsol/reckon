@@ -10,8 +10,8 @@
 			 function($scope,$location,$exceptionHandler,LoginService) {
 
 		$scope.login = function () {
-			$location.path('/dashboard');
-			/*LoginService.Login($scope).success(function(response, status, headers, config){
+			LoginService.Login($scope).success(function(response, status, headers, config){
+				//Get All events list api  than it will redirect to dashboard
 				$location.path('/dashboard');
 			}).error(function(response, status) {
 				var errormsg='Unable to Login Check setting or Loging Details '+' Status Code : '+status;
@@ -19,7 +19,7 @@
 				alert(errormsg);
 				$exceptionHandler(errormsg);
 				$location.path('/login');
-			});*/
+			});
     };
 			 } ]);
 }());

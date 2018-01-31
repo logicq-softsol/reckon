@@ -1,16 +1,19 @@
 package com.logicq.reckon.service;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.logicq.reckon.model.EventIdentifier;
+import com.logicq.reckon.controller.helper.EventIdentifier;
+import com.logicq.reckon.controller.helper.StatusEvaluator;
 import com.logicq.reckon.model.TableInventory;
 import com.logicq.reckon.model.TableStatus;
 import com.logicq.reckon.repository.TableStatusRepository;
@@ -29,6 +32,9 @@ public class TableStatusServiceImpl implements TableStatusService {
 	@Autowired
 	InventoryService inventoryService;
 
+	@Autowired
+	StatusEvaluator statusEvaluator;
+
 	@Transactional
 	public void saveEvent(EventVO eventVO) {
 		Long event_status = eventVO.getStatus();
@@ -37,18 +43,24 @@ public class TableStatusServiceImpl implements TableStatusService {
 			TableStatus tableStatus = tableStatusRepository.getByTableid(tableinventory.getTableid());
 			if (null == tableStatus) {
 				tableStatus = new TableStatus();
-				tableStatus.setDate(new Date());
 				tableStatus.setTableid(tableinventory.getTableid());
 			}
 			if (EventIdentifier.REQUEST.equals(EventIdentifier.fromValue(event_status))) {
-				tableStatus.setStatus("RE");
+				tableStatus.setDate(new Date());
+				tableStatus.setStatus("SR");
 			} else {
-				tableStatus.setStatus("CA");
+				tableStatus.setDate(new Date());
+				tableStatus.setStatus("SC");
 			}
 			tableStatusRepository.saveAndFlush(tableStatus);
 			sendMessage(tableStatus);
 		}
 
+	}
+
+	@Transactional
+	public void UpdateTableStatus(List<TableStatus> tablestatusList) {
+		tableStatusRepository.save(tablestatusList);
 	}
 
 	@Transactional(readOnly = true)
@@ -63,9 +75,17 @@ public class TableStatusServiceImpl implements TableStatusService {
 
 	@Override
 	public void sendMessage(TableStatus tableStatus) {
-		Map<Long, String> statusMap = new HashMap<>();
-		statusMap.put(tableStatus.getTableid(), tableStatus.getStatus());
-		brokerMessagingTemplate.convertAndSend("/topics/event", tableStatus);
+		List<TableStatus> tablelist = tableStatusRepository.getBusyTables();
+		if (!tablelist.isEmpty()) {
+			Map<Long, String> result = new HashMap();
+			Instant end = Instant.now();
+			tablelist.stream().forEach((data) -> {
+				String statusCode = statusEvaluator.getStatusCodeForTime(data.getDate(), end);
+				result.put(data.getTableid(), statusCode);
+			});
+
+			brokerMessagingTemplate.convertAndSend("/topics/event", result);
+		}
 	}
 
 	@Override
