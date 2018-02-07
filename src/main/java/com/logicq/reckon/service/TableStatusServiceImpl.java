@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -18,6 +17,7 @@ import com.logicq.reckon.model.TableInventory;
 import com.logicq.reckon.model.TableStatus;
 import com.logicq.reckon.repository.TableStatusRepository;
 import com.logicq.reckon.vo.EventVO;
+import com.logicq.reckon.vo.ServiceRequestVO;
 
 @Service
 @Transactional
@@ -53,7 +53,7 @@ public class TableStatusServiceImpl implements TableStatusService {
 				tableStatus.setStatus("SC");
 			}
 			tableStatusRepository.saveAndFlush(tableStatus);
-			sendMessage(tableStatus);
+			busyTableDetails();
 		}
 
 	}
@@ -74,18 +74,30 @@ public class TableStatusServiceImpl implements TableStatusService {
 	}
 
 	@Override
-	public void sendMessage(TableStatus tableStatus) {
+	@Transactional
+	public void busyTableDetails() {
+		Map<Long, ServiceRequestVO> result = getBusyTableDetails();
+		brokerMessagingTemplate.convertAndSend("/topics/event", result);
+	}
+
+	@Override
+	@Transactional
+	public Map<Long, ServiceRequestVO> getBusyTableDetails() {
+		Map<Long, ServiceRequestVO> result = new HashMap();
 		List<TableStatus> tablelist = tableStatusRepository.getBusyTables();
 		if (!tablelist.isEmpty()) {
-			Map<Long, String> result = new HashMap();
-			Instant end = Instant.now();
+		
+			Instant now = Instant.now();
 			tablelist.stream().forEach((data) -> {
-				String statusCode = statusEvaluator.getStatusCodeForTime(data.getDate(), end);
-				result.put(data.getTableid(), statusCode);
+				ServiceRequestVO serviceReq = new ServiceRequestVO();
+				serviceReq.setRequestTime(data.getDate());
+				String statusCode = statusEvaluator.getStatusCodeForTime(serviceReq, now);
+				serviceReq.setStatus(statusCode);
+				result.put(data.getTableid(), serviceReq);
 			});
 
-			brokerMessagingTemplate.convertAndSend("/topics/event", result);
 		}
+		return result;
 	}
 
 	@Override

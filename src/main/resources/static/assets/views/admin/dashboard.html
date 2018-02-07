@@ -1,72 +1,353 @@
-<md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span>Table Details</span>
-      </div>
- <md-card>
-  <md-card-title>
-    <md-card-title-media>
-      <div class="md-media-sm card-media" layout>
-        <md-icon md-svg-icon="person" ></md-icon>
-      </div>
-    </md-card-title-media>
-    <md-card-title-text>
-      <span class="md-headline">Hotel Admin</span>
-      <span class="md-subhead description">RadhaKrishna Hotel</span>
-    </md-card-title-text>
-  </md-card-title>
-</md-card>
-</md-toolbar>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"> RECKON Dashboard </a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+			   <li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown"> 
+				  <i class="material-icons">add_circle</i>
+				</a>
+				<ul class="dropdown-menu">
+				<p class="text-left">
+				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+									data-target="#linkreckon" ng-click="reckonLinkConfigure()">Configure R-Notify</a>
+				</p>
+				<p class="text-left">
+				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+									data-target="#linkreckon" ng-click="reckonLinkConfigure()">Configure Advertisement</a>
+				</p>
+				<p class="text-left">
+				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+									data-target="#editservicestatus" ng-click="serviceConfigure()">Configure Services</a>
+				</p>
+				<p class="text-left">
+				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+									data-target="#linkreckon" ng-click="reckonLinkConfigure()">Configure Global</a>
+				</p>
+				</ul>
+			</li>
+			
+				<li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown"> <i
+						class="material-icons">dashboard</i>
+				</a></li>
 
-<div layout-gt-sm="row" layout="row">
- <div flex-gt-sm="30" flex>
-     <md-content>
-      <md-list flex>
-       <md-subheader class="md-no-sticky">Table Waiting  More Than 5 mins</md-subheader>
-        <md-list-item class="md-3-line" ng-repeat="table in tableListSRC" ng-click="null">
-          <img  class="md-avatar" alt="{{table.value}}" />
-          <div class="md-list-item-text" layout="column">
-            <h3>Table No : {{ table.value }}</h3>
-            <h4> Sorry For Delay</h4>
-            <p>Serving to You is our Priority</p>
-             <md-progress-linear md-mode="indeterminate" class={{table.status}}></md-progress-linear>
-          </div>
-          <md-divider ></md-divider>
-        </md-list-item>
-    </md-list>
-    </md-content>
-  </div>
-   <div flex-gt-sm="30" flex>
-     <md-content>
-      <md-list flex>
-      <md-subheader class="md-no-sticky">Table Waiting More  Than 3 mins</md-subheader>
-        <md-list-item class="md-3-line" ng-repeat="table in tableListSRM" ng-click="null">
-          <img  class="md-avatar" alt="{{table.value}}" />
-          <div class="md-list-item-text" layout="column">
-            <h3>Table No : {{ table.value }}</h3>
-            <h4> Be patience With Us</h4>
-            <p>We will listen to you</p>
-             <md-progress-linear md-mode="indeterminate" class={{table.status}}></md-progress-linear>
-          </div>
-          <md-divider ></md-divider>
-        </md-list-item>
-    </md-list>
-    </md-content>
-  </div>
-  <div flex-gt-sm="30" flex>
-     <md-content>
-      <md-list flex>
-      <md-subheader class="md-no-sticky">Table Recently Rquested</md-subheader>
-        <md-list-item class="md-3-line" ng-repeat="table in tableListSR" ng-click="null">
-          <img  class="md-avatar" alt="{{table.value}}" />
-          <div class="md-list-item-text" layout="column">
-            <h3>Table No : {{ table.value }}</h3>
-            <h4> We will attend you soon</h4>
-            <p> Be ready With Your Order</p>
-             <md-progress-linear md-mode="indeterminate" class={{table.status}}></md-progress-linear>
-          </div>
-          <md-divider ></md-divider>
-        </md-list-item>
-    </md-list>
-    </md-content>
-  </div>
+				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="material-icons">person</i>
+				</a>
+					<ul id="login-dp" class="dropdown-menu">
+						<li>
+							<div class="navbar-login">
+								<div class="row">
+									<div class="col-lg-4">
+										<p class="text-center">
+											<span> <i class="material-icons">person</i></span>
+										</p>
+									</div>
+									<div class="col-lg-8">
+										<p class="text-left">
+											<strong>Sudhanshu Lenka</strong>
+										</p>
+										<p class="text-left small">sudhanshulenka@ymail.com</p>
+										<p class="text-left">
+											<a href="profile" class="btn btn-primary btn-block btn-sm">View
+												Profile</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<div class="navbar-login navbar-login-session">
+								<div class="row">
+									<div class="col-lg-12">
+										<p>
+											<a href="logout" class="btn btn-danger btn-block">Logout</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<div class="jumbotron">
+	<div class="container-fluid">
+		<div class="col-lg-8 col-md-12">
+			<div class="card card-nav-tabs">
+				<div class="card-header" data-background-color="purple"  ng-init="getAllTables()">
+					<h4 class="title">R-Notify Status</h4>
+				</div>
+				<div class="card-content table-responsive">
+					<table class="table table-hover">
+						<thead class="text-warning">
+							<th>Table/Room</th>
+							<th>Table Name</th>
+							<th>Reckon Id</th>
+							<th>Status</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="rlinked in reckonlinkedlist">
+								<td>{{rlinked.tableid}}</td>
+								<td>{{rlinked.tablename}}</td>
+								<td>{{rlinked.reckonid}}</td>
+								<td>{{rlinked.status}}</td>
+								<td><a href="" data-toggle="modal"
+									data-target="#linkreckon" ng-click="eachReckonLinkDetails(rlinked)"><i class="material-icons">mode_edit</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-12">
+			<div class="card card-nav-tabs">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">Advertisement Configuration</h4>
+
+				</div>
+				<div class="card-content table-responsive">
+					<table class="table table-hover">
+						<thead class="text-warning">
+							<th>File Name</th>
+							<th>Playing Sequence</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1001</td>
+								<td>1</td>
+								<td><a href="" data-toggle="modal" data-target="#editadv"><i
+										class="material-icons">mode_edit</i></a></td>
+							</tr>
+							<tr>
+								<td>1002</td>
+								<td>2</td>
+								<td><a href="" data-toggle="modal" data-target="#editadv"><i
+										class="material-icons">mode_edit</i></a></td>
+							</tr>
+							<tr>
+								<td>1003</td>
+								<td>3</td>
+								<td><a href="" data-toggle="modal" data-target="#editadv"><i
+										class="material-icons">mode_edit</i></a></td>
+							</tr>
+							<tr>
+								<td>1004</td>
+								<td>4</td>
+								<td><a href="" data-toggle="modal" data-target="#editadv"><i
+										class="material-icons">mode_edit</i></a></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-lg-8 col-md-12">
+			<div class="card card-nav-tabs">
+				<div class="card-header" data-background-color="purple" ng-init="getAllServiceDetails()">
+					<h4 class="title">Service Configuration</h4>
+				</div>
+				<div class="card-content table-responsive">
+					<table class="table table-hover">
+						<thead class="text-warning">
+							<th>Service Name</th>
+							<th>Service Code</th>
+							<th>Service Threshold(min)</th>
+							<th>Service Icon</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="service in servicelist">
+								<td>{{service.servicename}}</td>
+								<td>{{service.servicecode}}</td>
+								<td>{{service.threshold}}</td>
+								<td>{{service.iconName}}</td>
+								<td><a href="" data-toggle="modal"
+									data-target="#editservicestatus" ng-click="eachServiceDetails(service)"><i class="material-icons">mode_edit</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-12">
+			<div class="card card-nav-tabs">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">Global Configuration</h4>
+
+				</div>
+				<div class="card-content table-responsive">
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Adv File Directory</label> <input
+								type="text" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Status Icon Directory</label> <input
+								type="text" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div id="editadv" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">Advertisement Configuration</h4>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">File Name</label> <input type="text"
+								class="form-control" disabled>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Playing Sequence</label> <input
+								type="text" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="editservicestatus" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">Service Configuration</h4>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Service Name</label>
+							 <input	type="text" ng-model="serviceconfg.servicename" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Service Code</label> 
+							<input	type="text" ng-model="serviceconfg.servicecode" class="form-control" ng-disabled="serviceconfg.servcodedisable">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Service Threshold(sec)</label> 
+							<input	type="text"   ng-model="serviceconfg.threshold" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Icon Name</label> 
+							<input	type="text" ng-model="serviceconfg.iconName"  class="form-control">
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal" ng-click="saveServiceDetails()">Save</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="deleteServiceDetails()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="linkreckon" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">R-Notify Configuration</h4>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+
+					<div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Table/Room</label> 
+							<input type="text" ng-model="tableinv.tableid" class="form-control" ng-disabled="tableinv.disabletableno">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Table Name</label> 
+							<input type="text" ng-model="tableinv.tablename" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Reckon Id</label>
+							 <input type="text"	ng-model="tableinv.reckonid" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Status</label> 
+							<input type="text"	ng-model="tableinv.status" class="form-control" disabled>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" ng-click="updateReckonLinkDetails()" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-warning" ng-click="deleteReckonLinkDetails()" data-dismiss="modal">Delete</button>
+			</div>
+		</div>
+	</div>
 </div>

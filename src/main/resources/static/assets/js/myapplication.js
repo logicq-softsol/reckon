@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     
-   angular.module('reckonApp', ['ui.router','ngMaterial']).constant('AppConstants', {
+   angular.module('reckonApp', ['ui.router','ngMaterial','ngMessages']).constant('AppConstants', {
       'hostName':'http://127.0.0.1:8080/', 
      //'hostName':'http://getpay.co.in',
 	 //'hostName':'http://45.113.136.130:8167',
@@ -14,7 +14,16 @@
 	//   'applicationName' : '/mlmlogicq' ,
 	   'get' : 'GET' ,  
 	   'post' : 'POST' , 
-	   'loginURL' : 'api/login'
+	   'loginURL' : 'api/login',
+	   'GetAllTablesURL' : 'api/alltables',
+	   'GetReckonLinkdURL' : 'api/linkedDevices',
+	   'UpdateReckonLinkURL' : 'api/linkdTableAndDevice',
+	   'DeleteReckonLinkdURL' : 'api/deleteLinkedTableandDevice',
+	   'GetAllServiceDetailsURL':'api/allserviceDetails',
+	   'SaveServiceDetailsURL':'api/saveServiceDetails',
+	   'GetServiceDetailsForNameURL':'api/serviceDetailsForName',
+	   'GetserviceDetailsForCodeURL':'api/serviceDetailsForCode',
+	   'DeleteServiceDetailsURL':'api/deleteServiceDetails'
 	}).directive('ngConfirmClick', [
 	                                   function(){
 	                                       return {

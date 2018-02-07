@@ -1,4 +1,4 @@
- <md-content  layout="row" layout-align="space-around" layout-padding="layout-padding" class="login-form">
+ <!--  md-content  layout="row" layout-align="space-around" layout-padding="layout-padding" class="login-form">
       <md-card flex="flex" flex-gt-sm="50" flex-gt-md="50">
         <md-toolbar>
           <div class="md-toolbar-tools">
@@ -9,7 +9,7 @@
           <form name="loginform" ng-submit="login()">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Login</label>
-              <input type="text" name="username" ng-model="username" placeholder="login" required=""/>
+              <input type="text" name="username" ng-model="username" placeholder="login" required="" md-autofocus/>
               <div ng-messages="loginform.username.$error" role="alert" multiple="">
                 <div ng-message="required" class="my-message">Please enter your User name</div>
               </div>
@@ -25,4 +25,45 @@
           </form>
         </md-card-content>
       </md-card>
-    </md-content>
+    </md-content-->
+    
+    
+ <div  class="jumbotron">
+			 <div class="container-fluid">
+                      
+		           <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">Login Details</h4>
+                                </div>
+                                <div class="card-content">
+                                
+                                   <form name="loginform" ng-submit="login()">
+                                            <div class="col-md-7">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">User Name</label>
+                                                    <input type="text" name="username" ng-model="username"  class="form-control" required>
+                                                     <div ng-messages="loginform.username.$error" role="alert">
+                											<div ng-message="required" class="my-message">Please enter your User name</div>
+             										 </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Password</label>
+                                                    <input  type="password" name="password" ng-model="password" class="form-control" required>
+                                                      <div ng-messages="loginform.password.$error" role="alert">
+              											  <div ng-message="required" class="my-message">Please enter your password.</div>
+             										 </div>
+                                                </div>
+                                            </div>
+                                   
+                                        <button type="submit"   ng-disabled="!loginform.$valid"  class="btn btn-info" data-dismiss="modal">Login</button>
+                                   </form>
+                                </div>
+                              </div>
+                            </div> 
+                          </div>    
+                        </div>             
+  </div>                       

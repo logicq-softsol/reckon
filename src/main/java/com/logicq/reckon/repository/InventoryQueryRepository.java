@@ -10,4 +10,6 @@ public interface InventoryQueryRepository {
 
 	List<TableInventory> linkedTables();
 
+	List<TableInventory> allTables();
+
 }

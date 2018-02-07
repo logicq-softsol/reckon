@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import com.logicq.reckon.controller.helper.StatusEvaluator;
 import com.logicq.reckon.model.TableStatus;
 import com.logicq.reckon.service.TableStatusService;
+import com.logicq.reckon.vo.ServiceRequestVO;
 
 @Configuration
 @EnableScheduling
@@ -29,17 +30,19 @@ public class TableStatusSchedule {
 	@Autowired
 	StatusEvaluator statusEvaluator;
 
-	@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelay = 30000)
 	public void scheduleFixedDelayTask() {
 		List<TableStatus> tablelist = tableStatusService.getBusyTables();
-		System.out.println(" Busy Table List : "+tablelist.size() );
+		System.out.println(" Busy Table List : " + tablelist.size());
 		if (!tablelist.isEmpty()) {
-			Map<Long, String> result = new HashMap();
-			Instant end = Instant.now();
+			Map<Long, ServiceRequestVO> result = new HashMap();
+			Instant now = Instant.now();
 			tablelist.stream().forEach((data) -> {
-				String statusCode = statusEvaluator.getStatusCodeForTime(data.getDate(), end);
-				System.out.println(" Status Code : "+statusCode );
-				result.put(data.getTableid(), statusCode);
+				ServiceRequestVO serviceReq = new ServiceRequestVO();
+				serviceReq.setRequestTime(data.getDate());
+				String statusCode = statusEvaluator.getStatusCodeForTime(serviceReq, now);
+				serviceReq.setStatus(statusCode);
+				result.put(data.getTableid(), serviceReq);
 			});
 
 			brokerMessagingTemplate.convertAndSend("/topics/event", result);

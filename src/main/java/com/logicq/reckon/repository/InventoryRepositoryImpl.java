@@ -31,5 +31,12 @@ public class InventoryRepositoryImpl implements InventoryQueryRepository {
 				TableInventory.class);
 		return query.getResultList();
 	}
+	
+	@Override
+	public List<TableInventory> allTables() {
+		Query query = entityManager.createQuery("SELECT TI FROM TableInventory TI ",
+				TableInventory.class);
+		return query.getResultList();
+	}
 
 }

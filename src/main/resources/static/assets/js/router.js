@@ -18,7 +18,11 @@
 				}), $stateProvider.state('dashboard', {
 					url : "/dashboard",
 					templateUrl : "assets/views/admin/dashboard.html",
-					controller : 'EventController'
+					controller : 'DashboardController'
+				}), $stateProvider.state('profile', {
+					url : "/profile",
+					templateUrl : "assets/views/profil/profil.html",
+					controller : 'ProfileController'
 				})
 			});
 })();

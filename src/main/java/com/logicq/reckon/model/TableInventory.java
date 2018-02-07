@@ -23,8 +23,11 @@ public class TableInventory implements Serializable {
 	@Column(name = "DEVICE_ID")
 	private Long reckonid;
 
-	@Column(name = "COMMENTS")
-	private String comments;
+	@Column(name = "TABLE_NAME")
+	private String tablename;
+
+	@Column(name = "STATUS")
+	private String status;
 
 	public Long getTableid() {
 		return tableid;
@@ -42,20 +45,27 @@ public class TableInventory implements Serializable {
 		this.reckonid = reckonid;
 	}
 
-	public String getComments() {
-		return comments;
+	public String getTablename() {
+		return tablename;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "TableInventory [tableid=" + tableid + ", reckonid=" + reckonid + ", comments=" + comments + "]";
+		return "TableInventory [tableid=" + tableid + ", reckonid=" + reckonid + ", tablename=" + tablename
+				+ ", status=" + status + "]";
 	}
 
 	
-	
-
 }

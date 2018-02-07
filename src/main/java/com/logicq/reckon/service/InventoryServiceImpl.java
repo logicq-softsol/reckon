@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import com.logicq.reckon.controller.helper.Status;
 import com.logicq.reckon.model.TableInventory;
 import com.logicq.reckon.repository.InventoryRepository;
 
@@ -18,12 +20,29 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	@Transactional
 	public void saveLinkTableAndDevice(TableInventory tableInventory) {
-		inventoryRepository.saveAndFlush(tableInventory);
+		if (null != tableInventory) {
+			if (null == tableInventory.getReckonid())
+				tableInventory.setStatus(Status.NOT_LINKED.name());
+			else
+				tableInventory.setStatus(Status.LINKED.name());
+		}
+
+		inventoryRepository.save(tableInventory);
 	}
 
 	@Override
 	@Transactional
 	public void saveMultiTableAndDevices(List<TableInventory> tableList) {
+		if (null != tableList && !tableList.isEmpty()) {
+			tableList.forEach(tab -> {
+				if (null == tab.getReckonid())
+					tab.setStatus(Status.NOT_LINKED.name());
+				else if (StringUtils.isEmpty(tab.getStatus()))
+					tab.setStatus(Status.LINKED.name());
+
+			});
+
+		}
 		inventoryRepository.save(tableList);
 	}
 
@@ -35,7 +54,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	@Transactional
-	public void deleteLinkTablesAndDevices(List<TableInventory> tables) {
+	public void deleteLinkTablesAndDevices(TableInventory tables) {
 		inventoryRepository.delete(tables);
 	}
 
@@ -61,6 +80,11 @@ public class InventoryServiceImpl implements InventoryService {
 	@Transactional
 	public TableInventory getByReckonid(Long tableid) {
 		return inventoryRepository.findByTableid(tableid);
+	}
+
+	@Override
+	public List<TableInventory> getAllTables() {
+		return inventoryRepository.allTables();
 	}
 
 }

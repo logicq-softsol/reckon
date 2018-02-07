@@ -12,7 +12,7 @@ public interface InventoryService {
 
 	void deleteLinkTableAndDevice(TableInventory tableInventory);
 
-	void deleteLinkTablesAndDevices(List<TableInventory> tables);
+	void deleteLinkTablesAndDevices(TableInventory table);
 
 	List<TableInventory> getNotLinkedTables();
 
@@ -21,5 +21,7 @@ public interface InventoryService {
 	TableInventory getByTableid(Long reckonid);
 	
 	TableInventory getByReckonid(Long tableid);
+	
+	List<TableInventory> getAllTables();
 
 }
