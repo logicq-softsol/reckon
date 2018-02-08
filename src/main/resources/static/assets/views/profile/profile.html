@@ -12,19 +12,17 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="dashboard" class="dropdown-toggle" data-toggle="dropdown" ng-click="viewDashboard()">
                                     <i class="material-icons">dashboard</i>
-                                    <p class="hidden-lg hidden-md">Dashboard</p>
                                 </a>
                             </li>
                          
                             <li>
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" >
                                     <i class="material-icons">person</i>
-                                    <p class="hidden-lg hidden-md">Profile</p>
                                 </a>
 									<ul id="login-dp" class="dropdown-menu">
-										       <li>
+							<li>
                             <div class="navbar-login">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -33,10 +31,10 @@
                                         </p>
                                     </div>
                                     <div class="col-lg-8">
-                                        <p class="text-left"><strong>Sudhanshu Lenka</strong></p>
-                                        <p class="text-left small">sudhanshulenka@ymail.com</p>
+                                        <p class="text-left"><strong>{{userdetail.firstname}} {{userdetail.lastname}}</strong></p>
+                                        <p class="text-left small">{{userdetail.email}}</p>
                                         <p class="text-left">
-                                            <a href="profile" class="btn btn-primary btn-block btn-sm">View Profile</a>
+                                            <a href="" class="btn btn-primary btn-block btn-sm">View Profile</a>
                                         </p>
                                     </div>
                                 </div>
@@ -63,12 +61,11 @@
       
            
             <div  class="jumbotron">
-			 <div class="container-fluid">
-                      
-		           <div class="row">
-                        <div class="col-md-8">
+			 <div class="container-fluid">       
+		           <div class="row" >
+                        <div class="col-md-8" >
                             <div class="card">
-                                <div class="card-header" data-background-color="purple">
+                                <div class="card-header" data-background-color="purple" ng-init="displayProfile()">
                                     <h4 class="title">Owner Profile</h4>
                                 </div>
                                 <div class="card-content">
@@ -77,20 +74,20 @@
 										<div class="col-md-3">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Username</label>
-                                                    <input type="text" class="form-control" disabled>
+                                                    <input type="text" class="form-control" ng-model="userdetail.username" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Mobile Number</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control"  ng-model="userdetail.mobileno" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-5">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Email address</label>
-                                                    <input type="email" class="form-control">
+                                                    <input type="email" class="form-control" ng-model="userdetail.email" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                         </div>
@@ -98,13 +95,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Fist Name</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.firstname" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Last Name</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.lastname" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +109,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Adress</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.address" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                         </div>
@@ -120,23 +117,24 @@
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">City</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.city" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Country</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.country" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Postal Code</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.postalcode" ng-disabled="userdetail.profileprop">
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                                        <button type="submit" class="btn btn-primary pull-right" ng-click="performProfileEvent()">{{userdetail.eventtext}}</button>
+                                         <button type="submit" class="btn btn-primary pull-right" ng-click="performProfileEventReset()">RESET</button>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -145,18 +143,18 @@
                         <div class="col-md-4">
                             <div class="card card-profile">
                                 <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img" src="../assets/img/faces/marc.jpg" />
+                                    <a href="">
+                                        <img class="img" src="assets/img/comp/logo.jpg" />
                                     </a>
                                 </div>
                                 <div class="content">
-								   <h4 class="card-title">Company Name</h4>
-                                    <h6 class="category text-gray">Tag Line</h6>
+								   <h4 class="card-title">{{userdetail.compname}}</h4>
+                                    <h6 class="category text-gray">{{userdetail.tagline}}</h6>
                                     
                                     <p class="card-content">
-                                        About Company
+                                        {{userdetail.aboutcomp}}
                                     </p>
-                                    <a href="" data-toggle="modal" data-target="#updateprofile"  class="btn btn-primary btn-round">Update</a>
+                                    <a href="" data-toggle="modal" data-target="#updateprofile" ng-click="updateCompDetails()" class="btn btn-primary btn-round">Update</a>
                                 </div>
                             </div>
                         </div>
@@ -203,13 +201,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Company Name</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.compname">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Tag Line</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.tagline">
                                                 </div>
                                             </div>
                                         </div>
@@ -217,14 +215,14 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">About Company</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" ng-model="userdetail.aboutcomp">
                                                 </div>
                                             </div>
                                         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
-		<button type="button" class="btn btn-warning" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="saveCompDetails()">Save</button>
+		<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
       </div>
     </div>
 

@@ -15,6 +15,8 @@
 	   'get' : 'GET' ,  
 	   'post' : 'POST' , 
 	   'loginURL' : 'api/login',
+	   'UpdateserURL' : 'api/updateUserDetails',
+	   'GetUserDetailsURL' : 'api/userDetails',
 	   'GetAllTablesURL' : 'api/alltables',
 	   'GetReckonLinkdURL' : 'api/linkedDevices',
 	   'UpdateReckonLinkURL' : 'api/linkdTableAndDevice',
@@ -23,7 +25,12 @@
 	   'SaveServiceDetailsURL':'api/saveServiceDetails',
 	   'GetServiceDetailsForNameURL':'api/serviceDetailsForName',
 	   'GetserviceDetailsForCodeURL':'api/serviceDetailsForCode',
-	   'DeleteServiceDetailsURL':'api/deleteServiceDetails'
+	   'DeleteServiceDetailsURL':'api/deleteServiceDetails',
+	   'GetAllAdvURL':'api/allAdv',
+	   'SaveAdvURL':'api/AdvConfig',
+	   'DeleteAdvURL':'api/deleteAdvConfig',
+	   'GetDirectoryDetailsURL':'api/directories',
+	   'SaveDirectoryDetailsURL':'api/saveDirectories'
 	}).directive('ngConfirmClick', [
 	                                   function(){
 	                                       return {

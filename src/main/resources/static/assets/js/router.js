@@ -21,8 +21,8 @@
 					controller : 'DashboardController'
 				}), $stateProvider.state('profile', {
 					url : "/profile",
-					templateUrl : "assets/views/profil/profil.html",
-					controller : 'ProfileController'
+					templateUrl : "assets/views/profile/profile.html",
+					controller : 'LoginController'
 				})
 			});
 })();

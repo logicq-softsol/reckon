@@ -21,7 +21,7 @@
 				</p>
 				<p class="text-left">
 				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
-									data-target="#linkreckon" ng-click="reckonLinkConfigure()">Configure Advertisement</a>
+									data-target="#editadv" ng-click="advConfigure()">Configure Advertisement</a>
 				</p>
 				<p class="text-left">
 				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
@@ -29,16 +29,11 @@
 				</p>
 				<p class="text-left">
 				<a href="" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
-									data-target="#linkreckon" ng-click="reckonLinkConfigure()">Configure Global</a>
+									data-target="#directoryconfig" ng-click="globalConfigure()">Directory Configure</a>
 				</p>
 				</ul>
 			</li>
 			
-				<li class="dropdown">
-				<a href="" class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="material-icons">dashboard</i>
-				</a></li>
-
 				<li><a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="material-icons">person</i>
 				</a>
@@ -57,7 +52,7 @@
 										</p>
 										<p class="text-left small">sudhanshulenka@ymail.com</p>
 										<p class="text-left">
-											<a href="profile" class="btn btn-primary btn-block btn-sm">View
+											<a href="" class="btn btn-primary btn-block btn-sm" ng-click="viewProfile()">View
 												Profile</a>
 										</p>
 									</div>
@@ -85,7 +80,7 @@
 
 <div class="jumbotron">
 	<div class="container-fluid">
-		<div class="col-lg-8 col-md-12">
+		<div class="col-lg-7 col-md-12">
 			<div class="card card-nav-tabs">
 				<div class="card-header" data-background-color="purple"  ng-init="getAllTables()">
 					<h4 class="title">R-Notify Status</h4>
@@ -97,6 +92,7 @@
 							<th>Table Name</th>
 							<th>Reckon Id</th>
 							<th>Status</th>
+							<th>Icon Name</th>
 						</thead>
 						<tbody>
 							<tr ng-repeat="rlinked in reckonlinkedlist">
@@ -104,6 +100,7 @@
 								<td>{{rlinked.tablename}}</td>
 								<td>{{rlinked.reckonid}}</td>
 								<td>{{rlinked.status}}</td>
+								<td>{{rlinked.iconname}}</td>
 								<td><a href="" data-toggle="modal"
 									data-target="#linkreckon" ng-click="eachReckonLinkDetails(rlinked)"><i class="material-icons">mode_edit</i></a></td>
 							</tr>
@@ -112,9 +109,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-12">
+		<div class="col-lg-5 col-md-12">
 			<div class="card card-nav-tabs">
-				<div class="card-header" data-background-color="purple">
+				<div class="card-header" data-background-color="purple" ng-init="getAllAdv()">
 					<h4 class="title">Advertisement Configuration</h4>
 
 				</div>
@@ -125,30 +122,11 @@
 							<th>Playing Sequence</th>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1001</td>
-								<td>1</td>
-								<td><a href="" data-toggle="modal" data-target="#editadv"><i
+							<tr  ng-repeat="adv in advlist">
+								<td>{{adv.filename}}</td>
+								<td>{{adv.sequence}}</td>
+								<td><a href="" data-toggle="modal" data-target="#editadv" ng-click="eachAdv(adv)"><i
 										class="material-icons">mode_edit</i></a></td>
-							</tr>
-							<tr>
-								<td>1002</td>
-								<td>2</td>
-								<td><a href="" data-toggle="modal" data-target="#editadv"><i
-										class="material-icons">mode_edit</i></a></td>
-							</tr>
-							<tr>
-								<td>1003</td>
-								<td>3</td>
-								<td><a href="" data-toggle="modal" data-target="#editadv"><i
-										class="material-icons">mode_edit</i></a></td>
-							</tr>
-							<tr>
-								<td>1004</td>
-								<td>4</td>
-								<td><a href="" data-toggle="modal" data-target="#editadv"><i
-										class="material-icons">mode_edit</i></a></td>
-
 							</tr>
 						</tbody>
 					</table>
@@ -157,7 +135,7 @@
 
 		</div>
 
-		<div class="col-lg-8 col-md-12">
+		<div class="col-lg-7 col-md-12">
 			<div class="card card-nav-tabs">
 				<div class="card-header" data-background-color="purple" ng-init="getAllServiceDetails()">
 					<h4 class="title">Service Configuration</h4>
@@ -185,25 +163,27 @@
 			</div>
 		</div>
 
-		<div class="col-lg-4 col-md-12">
+		<div class="col-lg-5 col-md-12">
 			<div class="card card-nav-tabs">
-				<div class="card-header" data-background-color="purple">
-					<h4 class="title">Global Configuration</h4>
+				<div class="card-header" data-background-color="purple" ng-init="getDirectoryDetails()">
+					<h4 class="title">Directory Configuration</h4>
 
 				</div>
 				<div class="card-content table-responsive">
-					<div class="col-md-7">
-						<div class="form-group label-floating">
-							<label class="control-label">Adv File Directory</label> <input
-								type="text" class="form-control">
-						</div>
-					</div>
-					<div class="col-md-7">
-						<div class="form-group label-floating">
-							<label class="control-label">Status Icon Directory</label> <input
-								type="text" class="form-control">
-						</div>
-					</div>
+					<table class="table table-hover">
+						<thead class="text-warning">
+							<th> Directory Type</th>
+							<th>Directory Path</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="gconfig in globalconfigs">
+								<td>{{gconfig.displayText}}</td>
+								<td>{{gconfig.filePath}}</td>
+								<td><a href="" data-toggle="modal"
+									data-target="#directoryconfig" ng-click="eachDirectoryDetails(gconfig)"><i class="material-icons">mode_edit</i></a></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 
@@ -211,6 +191,46 @@
 
 	</div>
 </div>
+
+
+<!-- Modal -->
+<div id="directoryconfig" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">Directory Configuration</h4>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="card-content table-responsive">
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Directory Type</label>
+							 <input type="text"  list="directoryTypeList"  ng-model="dconfig.displayText"  ng-change="onChangeDirectoryType(dconfig)" class="form-control">
+							 <datalist id="directoryTypeList">
+      							  <option ng-repeat="dic in dicTypeList" value="{{dic.displayText}}">
+    						</datalist>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="form-group label-floating">
+							<label class="control-label">Directory Path</label> 
+							<input type="text" ng-model="dconfig.filePath"  class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal" ng-click="saveDirectoryDetails()">Save</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="deleteDirectoryDetails()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 
 <!-- Modal -->
@@ -230,21 +250,21 @@
 
 					<div class="col-md-7">
 						<div class="form-group label-floating">
-							<label class="control-label">File Name</label> <input type="text"
-								class="form-control" disabled>
+							<label class="control-label">File Name</label> 
+							<input type="text"	ng-model="adv.filename"  class="form-control">
 						</div>
 					</div>
 					<div class="col-md-7">
 						<div class="form-group label-floating">
-							<label class="control-label">Playing Sequence</label> <input
-								type="text" class="form-control">
+							<label class="control-label">Playing Sequence</label>
+							 <input	type="text"  ng-model="adv.sequence" class="form-control">
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
-				<button type="button" class="btn btn-warning" data-dismiss="modal">Delete</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal" ng-click="saveAdv()">Save</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="deleteAdv()">Delete</button>
 			</div>
 		</div>
 	</div>
@@ -330,16 +350,22 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="form-group label-floating">
 							<label class="control-label">Reckon Id</label>
 							 <input type="text"	ng-model="tableinv.reckonid" class="form-control">
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="form-group label-floating">
 							<label class="control-label">Status</label> 
 							<input type="text"	ng-model="tableinv.status" class="form-control" disabled>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group label-floating">
+							<label class="control-label">Icon Name</label> 
+							<input type="text"	ng-model="tableinv.iconname" class="form-control">
 						</div>
 					</div>
 				</div>

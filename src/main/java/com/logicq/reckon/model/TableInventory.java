@@ -26,9 +26,12 @@ public class TableInventory implements Serializable {
 	@Column(name = "TABLE_NAME")
 	private String tablename;
 
-	@Column(name = "STATUS")
+	@Column(name = "LINKED_STATUS")
 	private String status;
 
+	@Column(name = "ICON_PATH")
+	private String iconname;
+	
 	public Long getTableid() {
 		return tableid;
 	}
@@ -61,11 +64,21 @@ public class TableInventory implements Serializable {
 		this.status = status;
 	}
 
+	public String getIconname() {
+		return iconname;
+	}
+
+	public void setIconname(String iconname) {
+		this.iconname = iconname;
+	}
+
 	@Override
 	public String toString() {
 		return "TableInventory [tableid=" + tableid + ", reckonid=" + reckonid + ", tablename=" + tablename
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", iconname=" + iconname + "]";
 	}
+
+	
 
 	
 }

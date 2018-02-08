@@ -16,9 +16,12 @@
 			 $scope.servicelist = [];
 			 $scope.serviceconfg={};
 			 $scope.serviceconfg.servcodedisable=true;
+			 $scope.advlist=[];
+			 $scope.adv={};
+			 $scope.globalconfigs=[];
+			 $scope.dconfig={};
+			 $scope.dicTypeList=[{"displayText":"R-NOTIFY"},{"displayText":"SERVICE"},{"displayText":"ADVERTISEMENT"}];
 			 
-			 
-			
 			 $scope.getAllTables = function () {
 				 DashboardService.GetAllTableDetails($scope).success(function(response, status, headers, config){
 					 $scope.reckonlinkedlist=response;
@@ -44,6 +47,7 @@
 				 $scope.tableinv.tablename=rlinked.tablename;
 				 $scope.tableinv.reckonid=rlinked.reckonid;
 				 $scope.tableinv.status=rlinked.status;
+				 $scope.tableinv.iconname=rlinked.iconname;
 			 }
 			 
 			 $scope.updateReckonLinkDetails = function () {
@@ -116,5 +120,89 @@
 			
 			 }
 			 
+			 
+			 $scope.getAllAdv = function () {
+				 DashboardService.GetAllAdv($scope).success(function(response, status, headers, config){
+					 $scope.advlist=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to get All list of Adv'+' Status Code : '+status;
+						 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
+						//alert(errormsg);
+						$exceptionHandler(errormsg);
+					});
+			 }
+			 
+			 $scope.eachAdv = function (adv) {
+				 $scope.adv={};
+				 $scope.adv.filename=adv.filename;
+				 $scope.adv.id=adv.id;
+				 $scope.adv.sequence=adv.sequence;
+			 }
+			 
+			 $scope.saveAdv = function () {
+				 DashboardService.SaveAdv($scope).success(function(response, status, headers, config){
+					 $scope.advlist=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to save Adv'+' Status Code : '+status;
+						 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
+						//alert(errormsg);
+						$exceptionHandler(errormsg);
+					});
+			 }
+			 
+			 $scope.deleteAdv = function () {
+				 DashboardService.DeleteAdv($scope).success(function(response, status, headers, config){
+					 $scope.advlist=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to Delete Adv'+' Status Code : '+status;
+						$exceptionHandler(errormsg);
+					});
+			
+			 }
+			 $scope.advConfigure = function () {
+				 $scope.adv={};
+			 } 
+			 
+			 $scope.viewProfile = function () {
+				 $location.path('/profile');
+			 }
+			 
+			 $scope.logOut = function () {
+				 $location.path('/logout');
+			 }
+			 
+			
+			 
+			 $scope.getDirectoryDetails= function () {
+				 DashboardService.GetDirectoryDetails($scope).success(function(response, status, headers, config){
+					 $scope.globalconfigs=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to get All list of directories'+' Status Code : '+status;
+						 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
+						//alert(errormsg);
+						$exceptionHandler(errormsg);
+					});
+			 }
+			 
+			 $scope.saveDirectoryDetails = function () {
+				 DashboardService.SaveDirectoryDetails($scope).success(function(response, status, headers, config){
+					 $scope.globalconfigs=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to save updated directories'+' Status Code : '+status;
+						$exceptionHandler(errormsg);
+					});
+			 }
+			 
+			 $scope.eachDirectoryDetails = function (gconfig) {
+				 $scope.dconfig.displayText=gconfig.displayText;
+				 $scope.dconfig.filePath=gconfig.filePath;
+				 $scope.dconfig.type=gconfig.type;
+			 }
+			 
+			 $scope.onChangeDirectoryType= function (dconfig) {
+				 $scope.dconfig.type=dconfig.displayText;
+				 $scope.dconfig.displayText=dconfig.displayText;
+			 }
+				 
 			 } ]);
 }());

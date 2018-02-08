@@ -106,7 +106,57 @@
 					data : $scope.serviceconfg
 				})
 			},			
-			
+			GetAllAdv: function ($scope) {
+
+				return  $http({
+					method: 'GET',
+					url:AppConstants.hostName+AppConstants.GetAllAdvURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
+			},
+			SaveAdv: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.SaveAdvURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : $scope.adv
+				})
+			},	
+			DeleteAdv: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.DeleteAdvURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : $scope.adv
+				})
+			},			
+			GetDirectoryDetails: function ($scope) {
+				return  $http({
+					method: 'GET',
+					url:AppConstants.hostName+AppConstants.GetDirectoryDetailsURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
+			},			
+			SaveDirectoryDetails: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.SaveDirectoryDetailsURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : $scope.dconfig
+				})
+			},			
 		}
 	}]);
 }());
