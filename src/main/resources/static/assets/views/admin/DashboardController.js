@@ -9,7 +9,8 @@
 			 '$interval',
 			 '$exceptionHandler',
 			 'DashboardService',
-			 function($scope,$rootScope,$location,$interval,$exceptionHandler,DashboardService) {
+			 'LoginService',
+			 function($scope,$rootScope,$location,$interval,$exceptionHandler,DashboardService,LoginService) {
 			 $scope.reckonlinkedlist = [];	
 			 $scope.tableinv={};
 			 $scope.tableinv.disabletableno=true;
@@ -21,6 +22,21 @@
 			 $scope.globalconfigs=[];
 			 $scope.dconfig={};
 			 $scope.dicTypeList=[{"displayText":"R-NOTIFY"},{"displayText":"SERVICE"},{"displayText":"ADVERTISEMENT"}];
+			 
+			 
+			 
+			   $scope.displayUserProfile = function () {
+			    	LoginService.GetUserDetails($scope).success(function(response, status, headers, config){
+						$scope.userdetail=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to fetch User Details ';
+						$exceptionHandler(errormsg);
+					});
+			    }
+			 
+			   $scope.goToProfile = function () {
+					$location.path('/profile');
+			 }
 			 
 			 $scope.getAllTables = function () {
 				 DashboardService.GetAllTableDetails($scope).success(function(response, status, headers, config){
@@ -138,16 +154,29 @@
 				 $scope.adv.id=adv.id;
 				 $scope.adv.sequence=adv.sequence;
 			 }
-			 
+			 //Variable for upload file
+			 $scope.data=null;
 			 $scope.saveAdv = function () {
-				 DashboardService.SaveAdv($scope).success(function(response, status, headers, config){
-					 $scope.advlist=response;
+				 var form = $('#fileUploadForm')[0];
+				 $scope.data = new FormData(form);
+				 DashboardService.UploadFile($scope).success(function(response, status, headers, config){
+					 $scope.adv.filepath=response.filePath;
+					 $scope.adv.filename=response.filename;
+					 DashboardService.SaveAdv($scope).success(function(response, status, headers, config){
+						 $scope.advlist=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to save Adv'+' Status Code : '+status;
+							 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
+							//alert(errormsg);
+							$exceptionHandler(errormsg);
+						});
+					 
 					}).error(function(response, status) {
-						var errormsg='Unable to save Adv'+' Status Code : '+status;
-						 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
-						//alert(errormsg);
+						var errormsg='Unable to save updated directories'+' Status Code : '+status;
 						$exceptionHandler(errormsg);
 					});
+				 
+				
 			 }
 			 
 			 $scope.deleteAdv = function () {
@@ -203,6 +232,7 @@
 				 $scope.dconfig.type=dconfig.displayText;
 				 $scope.dconfig.displayText=dconfig.displayText;
 			 }
+			
 				 
 			 } ]);
 }());

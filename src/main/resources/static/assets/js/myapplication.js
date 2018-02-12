@@ -30,7 +30,8 @@
 	   'SaveAdvURL':'api/AdvConfig',
 	   'DeleteAdvURL':'api/deleteAdvConfig',
 	   'GetDirectoryDetailsURL':'api/directories',
-	   'SaveDirectoryDetailsURL':'api/saveDirectories'
+	   'SaveDirectoryDetailsURL':'api/saveDirectories',
+	   'GetCurrentAdvURL':'api/advPlay'
 	}).directive('ngConfirmClick', [
 	                                   function(){
 	                                       return {

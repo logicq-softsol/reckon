@@ -27,8 +27,6 @@ public class AdvConfigServiceImpl {
 
 	@Transactional
 	public List<AdvConfig> saveAdvConfig(AdvConfig advconfig) {
-		GlobalDirectory globalDirec = globalDirectoryRepo.getOne("ADVERTISEMENT");
-		advconfig.setFilepath(globalDirec.getFilePath() + advconfig.getFilename());
 		advConfigRepository.save(advconfig);
 		return advConfigRepository.findAll();
 	}

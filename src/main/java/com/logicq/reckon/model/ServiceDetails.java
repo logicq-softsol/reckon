@@ -1,16 +1,22 @@
 package com.logicq.reckon.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SERVICE_DETAILS")
+@Table(name = "SERVICES")
 public class ServiceDetails implements Serializable {
 
 	/**
@@ -19,68 +25,77 @@ public class ServiceDetails implements Serializable {
 	private static final long serialVersionUID = 216015083415993815L;
 
 	@Id
-	@Column(name = "ID", nullable = false)
+	@Column(name = "SERVICE_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long serviceId;
 
 	@Column(name = "NAME")
-	private String servicename;
+	private String serviceName;
 
 	@Column(name = "CODE")
-	private Long servicecode;
+	private Long serviceCode;
 
-	@Column(name = "THRESHOLD")
-	private Long threshold;
+	@Column(name = "ICON")
+	private String iconUrl;
 
-	@Column(name = "ICON_NAME")
-	private String iconName;
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "SERVICE_THRESHOLD", joinColumns = { @JoinColumn(name = "serviceId") }, inverseJoinColumns = {
+			@JoinColumn(name = "thresholdId") })
+	private Set<Threshold> thresholds = new HashSet<>();
 
-	public Long getId() {
-		return id;
+	@ManyToMany(mappedBy = "services")
+	private Set<Department> departments = new HashSet<>();
+
+	public Long getServiceId() {
+		return serviceId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
 	}
 
-	public String getServicename() {
-		return servicename;
+	public String getServiceName() {
+		return serviceName;
 	}
 
-	public void setServicename(String servicename) {
-		this.servicename = servicename;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
-	public Long getServicecode() {
-		return servicecode;
+	public Long getServiceCode() {
+		return serviceCode;
 	}
 
-	public void setServicecode(Long servicecode) {
-		this.servicecode = servicecode;
+	public void setServiceCode(Long serviceCode) {
+		this.serviceCode = serviceCode;
 	}
 
-	public Long getThreshold() {
-		return threshold;
+	public String getIconUrl() {
+		return iconUrl;
 	}
 
-	public void setThreshold(Long threshold) {
-		this.threshold = threshold;
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
 	}
 
-	public String getIconName() {
-		return iconName;
+	public Set<Threshold> getThresholds() {
+		return thresholds;
 	}
 
-	public void setIconName(String iconName) {
-		this.iconName = iconName;
+	public void setThresholds(Set<Threshold> thresholds) {
+		this.thresholds = thresholds;
 	}
 
-	@Override
-	public String toString() {
-		return "ServiceDetails [id=" + id + ", servicename=" + servicename + ", servicecode=" + servicecode
-				+ ", threshold=" + threshold + ", iconName=" + iconName + "]";
+	public Set<Department> getDepartments() {
+		return departments;
 	}
 
+	public void setDepartments(Set<Department> departments) {
+		this.departments = departments;
+	}
+	
+	
+	
 	
 
 }

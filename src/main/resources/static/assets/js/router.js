@@ -23,6 +23,10 @@
 					url : "/profile",
 					templateUrl : "assets/views/profile/profile.html",
 					controller : 'LoginController'
+				}), $stateProvider.state('event', {
+					url : "/event",
+					templateUrl : "assets/views/event/event.html",
+					controller : 'EventController'
 				})
 			});
 })();

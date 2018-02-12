@@ -156,7 +156,17 @@
 					dataType :'json',
 					data : $scope.dconfig
 				})
-			},			
+			},	
+			
+			UploadFile: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+"api/upload",
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': undefined} ,
+					data : $scope.data
+				})
+			},		
 		}
 	}]);
 }());

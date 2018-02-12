@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +34,10 @@ public class TableInventory implements Serializable {
 	@Column(name = "ICON_PATH")
 	private String iconname;
 	
+	@ManyToOne
+    @JoinColumn(name="deptId", nullable=false)
+	private Department department;
+
 	public Long getTableid() {
 		return tableid;
 	}
@@ -72,13 +78,15 @@ public class TableInventory implements Serializable {
 		this.iconname = iconname;
 	}
 
-	@Override
-	public String toString() {
-		return "TableInventory [tableid=" + tableid + ", reckonid=" + reckonid + ", tablename=" + tablename
-				+ ", status=" + status + ", iconname=" + iconname + "]";
+	public Department getDepartment() {
+		return department;
 	}
 
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 	
-
 	
+	
+		
 }
