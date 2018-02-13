@@ -10,7 +10,10 @@
 			 '$exceptionHandler',
 			 'DashboardService',
 			 'LoginService',
-			 function($scope,$rootScope,$location,$interval,$exceptionHandler,DashboardService,LoginService) {
+			 'DeptService',
+			 'ServiceCodeService',
+			 'ThresholdService',
+			 function($scope,$rootScope,$location,$interval,$exceptionHandler,DashboardService,LoginService,DeptService,ServiceCodeService,ThresholdService) {
 			 $scope.reckonlinkedlist = [];	
 			 $scope.tableinv={};
 			 $scope.tableinv.disabletableno=true;
@@ -22,8 +25,7 @@
 			 $scope.globalconfigs=[];
 			 $scope.dconfig={};
 			 $scope.dicTypeList=[{"displayText":"R-NOTIFY"},{"displayText":"SERVICE"},{"displayText":"ADVERTISEMENT"}];
-			 
-			 
+			 $scope.services=[];
 			 
 			   $scope.displayUserProfile = function () {
 			    	LoginService.GetUserDetails($scope).success(function(response, status, headers, config){
@@ -36,8 +38,63 @@
 			 
 			   $scope.goToProfile = function () {
 					$location.path('/profile');
-			 }
-			 
+			   }
+			   
+			   
+			   $scope.thresholdlist=[];
+			   $scope.threshold={};
+			   $scope.getThresholds = function () {
+				   ThresholdService.GetAllThreshold($scope).success(function(response, status, headers, config){
+						$scope.thresholdlist=response;
+					}).error(function(response, status) {
+						var errormsg='Unable to fetch User Details ';
+						$exceptionHandler(errormsg);
+					});
+			   }
+			   
+				 $scope.eachThresholdDetails = function (selectedThresh) {
+					 $scope.threshold={};
+					 $scope.threshold.services=[];
+					 $scope.threshold.thresholdId=selectedThresh.thresholdId;
+					 $scope.threshold.name=selectedThresh.name;
+					 $scope.threshold.seconds=selectedThresh.seconds;
+					 $scope.threshold.color=selectedThresh.color;
+					 $scope.threshold.services=selectedThresh.services;
+				 }
+				 
+				 $scope.updateThresholdDetails = function () {
+					 ThresholdService.SaveThreshold($scope).success(function(response, status, headers, config){
+						 $scope.thresholdlist=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to Update '+' Status Code : '+status;
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 $scope.deleteThresh = function () {
+					 ThresholdService.DeleteThreshold($scope).success(function(response, status, headers, config){
+						 $scope.thresholdlist=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to Delete'+' Status Code : '+status;
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 $scope.servlist=[];
+				 $scope.viewServicesDetails = function (selectedThreshold) {
+					 $scope.servlist=selectedThreshold.services;
+					 	/*for(int i=0;i<selectedThreshold.services.length;i++){
+					 		$scope.servlist[i].isSelected=true;
+					 	}*/
+				 }
+				 
+				 
+				 $scope.thresholdConfigure = function () {
+					 $scope.threshold={};
+					 //Fetch all services 
+				 }
+			   
+			   
+			   
+			   
 			 $scope.getAllTables = function () {
 				 DashboardService.GetAllTableDetails($scope).success(function(response, status, headers, config){
 					 $scope.reckonlinkedlist=response;

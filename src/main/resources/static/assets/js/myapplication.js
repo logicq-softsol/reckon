@@ -31,7 +31,17 @@
 	   'DeleteAdvURL':'api/deleteAdvConfig',
 	   'GetDirectoryDetailsURL':'api/directories',
 	   'SaveDirectoryDetailsURL':'api/saveDirectories',
-	   'GetCurrentAdvURL':'api/advPlay'
+	   'GetCurrentAdvURL':'api/advPlay',
+	   'GetAllThresholdURL':'/api/threshold/allThresolds',
+	   'SaveThresholdURL':'/api/threshold/threshold',
+	   'DeleteThresholdURL':'/api/threshold/removeThreshold',
+	   'GetAllDeptURL':'/api/dept/allDept',
+	   'SaveDeptURL':'/api/dept/dept',
+	   'DeleteDeptURL':'/api/dept/removeDept',
+	   'GetAllServiceCodeURL':'/api/service/allServiceCode',
+	   'SaveServiceCodeURL':'/api/service/serviceCode',
+	   'DeleteServiceCodeURL':'/api/service/removeServiceCode'
+	   
 	}).directive('ngConfirmClick', [
 	                                   function(){
 	                                       return {

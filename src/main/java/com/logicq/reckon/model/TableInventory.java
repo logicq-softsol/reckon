@@ -35,7 +35,7 @@ public class TableInventory implements Serializable {
 	private String iconname;
 	
 	@ManyToOne
-    @JoinColumn(name="deptId", nullable=false)
+    @JoinColumn(name="deptId")
 	private Department department;
 
 	public Long getTableid() {

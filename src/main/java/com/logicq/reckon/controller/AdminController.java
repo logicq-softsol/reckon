@@ -224,5 +224,9 @@ public class AdminController {
 		globalDirectory.save(directories);
 		return new ResponseEntity<List<GlobalDirectory>>(globalDirectory.findAll(), HttpStatus.OK);
 	}
+	
+	
+	
+	
 
 }
