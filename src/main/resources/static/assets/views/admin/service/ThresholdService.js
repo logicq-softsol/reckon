@@ -32,11 +32,11 @@
 
 				return  $http({
 					method: 'POST',
-					url:AppConstants.hostName+AppConstants.DeleteThresholdURL+"/"+threshold.thresholdId,
+					url:AppConstants.hostName+AppConstants.DeleteThresholdURL,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : ''
+					data : $scope.threshold
 				})
 			},
 		}

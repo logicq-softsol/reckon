@@ -34,11 +34,9 @@ public class ThresholdController {
 		return new ResponseEntity<List<Threshold>>(thresholdRepository.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/removeThreshold/{thresholdid}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Threshold>> removeThreashold(@RequestBody Long thresholdid) {
-		Threshold thres = new Threshold();
-		thres.setThresholdId(thresholdid);
-		thresholdRepository.delete(thres);
+	@RequestMapping(value = "/removeThreshold", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Threshold>> removeThreashold(@RequestBody Threshold thresold) {
+		thresholdRepository.delete(thresold);
 		return new ResponseEntity<List<Threshold>>(thresholdRepository.findAll(), HttpStatus.OK);
 	}
 

@@ -24,7 +24,7 @@
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : $scope.tableinv
+					data : $scope.servicecode
 				})
 			},
 			
@@ -36,7 +36,7 @@
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : $scope.tableinv
+					data :$scope.servicecode
 				})
 			},
 		}

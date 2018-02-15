@@ -34,10 +34,8 @@ public class DepartmentController {
 		return new ResponseEntity<List<Department>>(departmentRepository.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/removeDept/{deptid}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Department>> linkTableAndDevice(@RequestBody Long deptid) {
-		Department dept = new Department();
-		dept.setDeptId(deptid);
+	@RequestMapping(value = "/removeDept", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Department>> linkTableAndDevice(@RequestBody Department dept) {
 		departmentRepository.delete(dept);
 		return new ResponseEntity<List<Department>>(departmentRepository.findAll(), HttpStatus.OK);
 	}

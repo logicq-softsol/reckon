@@ -25,7 +25,7 @@
 			 $scope.globalconfigs=[];
 			 $scope.dconfig={};
 			 $scope.dicTypeList=[{"displayText":"R-NOTIFY"},{"displayText":"SERVICE"},{"displayText":"ADVERTISEMENT"}];
-			 $scope.services=[];
+			
 			 
 			   $scope.displayUserProfile = function () {
 			    	LoginService.GetUserDetails($scope).success(function(response, status, headers, config){
@@ -78,23 +78,99 @@
 							$exceptionHandler(errormsg);
 						});
 				 }
-				 $scope.servlist=[];
-				 $scope.viewServicesDetails = function (selectedThreshold) {
-					 $scope.servlist=selectedThreshold.services;
-					 	/*for(int i=0;i<selectedThreshold.services.length;i++){
-					 		$scope.servlist[i].isSelected=true;
-					 	}*/
-				 }
-				 
-				 
+			   
 				 $scope.thresholdConfigure = function () {
 					 $scope.threshold={};
 					 //Fetch all services 
 				 }
+				 
+				 
+				 $scope.serviceCodeList=[];
+				 $scope.servicecode={};
+				 $scope.getAllServices= function () {
+					 ServiceCodeService.GetAllServiceCode($scope).success(function(response, status, headers, config){
+							$scope.serviceCodeList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+					
+				 }
+				
+				 $scope.editServiceCode= function (sc) {
+					 $scope.servicecode.serviceId=sc.serviceId;
+					 $scope.servicecode.serviceName=sc.serviceName;
+					 $scope.servicecode.serviceCode=sc.serviceCode;
+					 $scope.servicecode.iconUrl=sc.iconUrl;
+				 }
+				 
+				 $scope.saveServiceCodeDetails= function () {
+					 ServiceCodeService.SaveServiceCode($scope).success(function(response, status, headers, config){
+							$scope.serviceCodeList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 
+				 $scope.deleteServiceCodeDetails= function () {
+					 ServiceCodeService.DeleteServiceCode($scope).success(function(response, status, headers, config){
+							$scope.serviceCodeList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 
+				 $scope.serviceConfigure = function () {
+					 $scope.servicecode={};
+				 }
+				 
 			   
-			   
-			   
-			   
+				 $scope.departmentList=[];
+				 $scope.department={};
+				 
+				 $scope.getAllDepartments= function () {
+					 DeptService.GetAllDept($scope).success(function(response, status, headers, config){
+							$scope.departmentList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+					
+				 }
+				
+				 $scope.editDept= function (dept) {
+					 $scope.department.deptId=dept.deptId;
+					 $scope.department.name=dept.name;
+					 $scope.department.type=dept.type;
+					 $scope.department.reckonCount=dept.reckonCount;
+				 }
+				 
+				 $scope.saveDeptDetails= function () {
+					 DeptService.SaveDept($scope).success(function(response, status, headers, config){
+							$scope.departmentList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 
+				 $scope.deleteDeptDetails= function () {
+					 DeptService.DeleteDept($scope).success(function(response, status, headers, config){
+							$scope.departmentList=response;
+						}).error(function(response, status) {
+							var errormsg='Unable to fetch User Details ';
+							$exceptionHandler(errormsg);
+						});
+				 }
+				 
+				 $scope.deptConfigure = function () {
+					 $scope.department={};
+				 }
+				 
+				 
+				 
 			 $scope.getAllTables = function () {
 				 DashboardService.GetAllTableDetails($scope).success(function(response, status, headers, config){
 					 $scope.reckonlinkedlist=response;
@@ -115,11 +191,13 @@
 			 
 			 $scope.eachReckonLinkDetails = function (rlinked) {
 				 $scope.tableinv={};
-				 $scope.tableinv.disabletableno=true;
+				 $scope.tableinv.dept={};
 				 $scope.tableinv.tableid=rlinked.tableid;
 				 $scope.tableinv.tablename=rlinked.tablename;
 				 $scope.tableinv.reckonid=rlinked.reckonid;
 				 $scope.tableinv.status=rlinked.status;
+				 $scope.tableinv.dept=rlinked.dept;
+				 $scope.tableinv.dept.name=rlinked.dept.name;
 				 $scope.tableinv.iconname=rlinked.iconname;
 			 }
 			 
@@ -165,10 +243,7 @@
 				 $scope.serviceconfg.iconName=service.iconName;
 			 }
 			
-			 $scope.serviceConfigure = function () {
-				 $scope.serviceconfg={};
-				 $scope.serviceconfg.servcodedisable=false;
-			 }
+			
 			 
 			 $scope.saveServiceDetails = function () {
 				 DashboardService.SaveServiceDetails($scope).success(function(response, status, headers, config){

@@ -34,12 +34,10 @@ public class ServiceCodeController {
 		return new ResponseEntity<List<ServiceDetails>>(serviceCodeRepository.findAll(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/removeServiceCode/{servicecode}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ServiceDetails>> removeServiceCode(@RequestBody Long servicecode) {
-		ServiceDetails service = new ServiceDetails();
-		service.setServiceId(servicecode);
+	@RequestMapping(value = "/removeServiceCode", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ServiceDetails>> removeServiceCode(@RequestBody ServiceDetails service) {
 		serviceCodeRepository.delete(service);
-		return new ResponseEntity<List<ServiceDetails>>(serviceCodeRepository	.findAll(), HttpStatus.OK);
+		return new ResponseEntity<List<ServiceDetails>>(serviceCodeRepository.findAll(), HttpStatus.OK);
 	}
 
 }
