@@ -15,18 +15,6 @@
 					data : ''
 				})
 			},	
-			GetAllTableDetails: function ($scope) {
-
-				return  $http({
-					method: 'GET',
-					url:AppConstants.hostName+AppConstants.GetAllTablesURL,
-					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
-					headers: {'Content-Type': 'application/json'} ,
-					dataType :'json',
-					data : ''
-				})
-			},	
-			
 			UpdateReckonLinkd: function ($scope) {
 
 				return  $http({
@@ -110,7 +98,18 @@
 
 				return  $http({
 					method: 'GET',
-					url:AppConstants.hostName+AppConstants.GetAllAdvURL,
+					url:AppConstants.hostName+AppConstants.AdvURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
+			},
+			GetAllAdvType: function ($scope) {
+
+				return  $http({
+					method: 'GET',
+					url:AppConstants.hostName+AppConstants.AdvURL+"/"+ $scope.advType,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
@@ -120,43 +119,47 @@
 			SaveAdv: function ($scope) {
 				return  $http({
 					method: 'POST',
-					url:AppConstants.hostName+AppConstants.SaveAdvURL,
+					url:AppConstants.hostName+AppConstants.AdvURL,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
 					data : $scope.adv
 				})
 			},	
+				
 			DeleteAdv: function ($scope) {
 				return  $http({
-					method: 'POST',
-					url:AppConstants.hostName+AppConstants.DeleteAdvURL,
+					method: 'DELETE',
+					url:AppConstants.hostName+AppConstants.AdvURL+"/"+$scope.adv.advId,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : $scope.adv
+					data : ''
 				})
-			},			
-			GetDirectoryDetails: function ($scope) {
+			},		
+			
+			
+			SaveTextAdv: function ($scope) {
 				return  $http({
-					method: 'GET',
-					url:AppConstants.hostName+AppConstants.GetDirectoryDetailsURL,
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.AdvURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : $scope.advText
+				})
+			},	
+				
+			DeleteTextAdv: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.AdvURL+"/"+$scope.advText.advId,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
 					data : ''
 				})
 			},			
-			SaveDirectoryDetails: function ($scope) {
-				return  $http({
-					method: 'POST',
-					url:AppConstants.hostName+AppConstants.SaveDirectoryDetailsURL,
-					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
-					headers: {'Content-Type': 'application/json'} ,
-					dataType :'json',
-					data : $scope.dconfig
-				})
-			},	
 			
 			UploadFile: function ($scope) {
 				return  $http({
@@ -166,7 +169,42 @@
 					headers: {'Content-Type': undefined} ,
 					data : $scope.data
 				})
+			},	
+			
+			GetAllEntity: function ($scope) {
+
+				return  $http({
+					method: 'GET',
+					url:AppConstants.hostName+AppConstants.EntityURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
+			},
+			SaveEntity: function ($scope) {
+				return  $http({
+					method: 'POST',
+					url:AppConstants.hostName+AppConstants.EntityURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : $scope.entity
+				})
+			},	
+				
+			DeleteEntity: function ($scope) {
+				return  $http({
+					method: 'DELETE',
+					url:AppConstants.hostName+AppConstants.EntityURL+"/"+$scope.entity.attrName,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
 			},		
+			
+			
 		}
 	}]);
 }());

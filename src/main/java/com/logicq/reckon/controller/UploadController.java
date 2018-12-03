@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 
 import javax.servlet.ServletContext;
 
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -30,23 +29,15 @@ public class UploadController {
 
 	@PostMapping("/upload")
 	public ResponseEntity<FileUploadVO> uploadFile(@RequestParam("file") MultipartFile uploadfile) throws IOException {
-		// String absolutePath =
-		// context.getRealPath("resources/static/assets/video/");
-		// String contextPath=context.getContextPath();
-		// System.out.println(contextPath);
 		FileUploadVO fileupload = new FileUploadVO();
 		byte[] bytes = uploadfile.getBytes();
-		Path path = Paths
-				.get("C://Users//SudhanshuLenka//Documents//GitHub//reckon//src//main//resources//static//assets//video//"
-						+ uploadfile.getOriginalFilename());
+		Path path = Paths.get("F:\\company\\reckonplus\\reckon\\src\\main\\resources\\static\\assets\\video\\"
+				+ uploadfile.getOriginalFilename());
 		Files.write(path, bytes);
 		fileupload.setFilename(uploadfile.getOriginalFilename());
-		// fileupload.setFileSize(uploadfile.getSize());
-		String url = "http://127.0.0.1:8080/" + "assets/video/" + uploadfile.getOriginalFilename();
-		fileupload.setFilePath(url);
+		fileupload.setFilePath("http://127.0.0.1:8080/" + "assets/video/" + uploadfile.getOriginalFilename());
 		fileupload.setFileType(uploadfile.getContentType());
 		return new ResponseEntity(fileupload, HttpStatus.OK);
 
 	}
-
 }

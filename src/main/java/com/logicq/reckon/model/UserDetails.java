@@ -22,16 +22,19 @@ public class UserDetails implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "USER_ID")
+	private Long userId;
 
 	@Column(name = "USER_NAME")
 	private String username;
+	
+	@Column(name = "PASSWORD")
+	private String password;
 
-	@Column(name = "F_NAME")
+	@Column(name = "FIRST_NAME")
 	private String firstname;
 
-	@Column(name = "L_NAME")
+	@Column(name = "LAST_NAME")
 	private String lastname;
 
 	@Column(name = "ADDRESS")
@@ -55,14 +58,13 @@ public class UserDetails implements Serializable {
 	@Column(name = "ACTIVE")
 	private boolean isActive;
 
-	@Column(name = "COMP_NAME")
-	private String compname;
+	public Long getUserId() {
+		return userId;
+	}
 
-	@Column(name = "TAG_LINE")
-	private String tagline;
-
-	@Column(name = "ABOUTCOMP", columnDefinition = "TEXT")
-	private String aboutcomp;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;
@@ -144,44 +146,24 @@ public class UserDetails implements Serializable {
 		this.isActive = isActive;
 	}
 
-	public Long getId() {
-		return id;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getCompname() {
-		return compname;
-	}
-
-	public void setCompname(String compname) {
-		this.compname = compname;
-	}
-
-	public String getTagline() {
-		return tagline;
-	}
-
-	public void setTagline(String tagline) {
-		this.tagline = tagline;
-	}
-
-	public String getAboutcomp() {
-		return aboutcomp;
-	}
-
-	public void setAboutcomp(String aboutcomp) {
-		this.aboutcomp = aboutcomp;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "UserDetails [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", address=" + address + ", city=" + city + ", country=" + country + ", postalcode="
-				+ postalcode + ", mobileno=" + mobileno + ", email=" + email + ", isActive=" + isActive + ", compname="
-				+ compname + ", tagline=" + tagline + ", aboutcomp=" + aboutcomp + "]";
+		return "UserDetails [userId=" + userId + ", username=" + username + ", password=" + password + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", address=" + address + ", city=" + city + ", country="
+				+ country + ", postalcode=" + postalcode + ", mobileno=" + mobileno + ", email=" + email + ", isActive="
+				+ isActive + "]";
 	}
+
+
+	
 
 }

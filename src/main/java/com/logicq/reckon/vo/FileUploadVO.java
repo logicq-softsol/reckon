@@ -1,11 +1,14 @@
 package com.logicq.reckon.vo;
 
+import org.springframework.core.io.Resource;
+
 public class FileUploadVO {
 	
 	private String filename;
 	private String filePath;
 	private String fileSize;
 	private String fileType;
+	private Resource resource;
 	
 	
 	public String getFilename() {
@@ -32,10 +35,19 @@ public class FileUploadVO {
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
+	
+	
+	public Resource getResource() {
+		return resource;
+	}
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+	
 	@Override
 	public String toString() {
 		return "FileUploadVO [filename=" + filename + ", filePath=" + filePath + ", fileSize=" + fileSize
-				+ ", fileType=" + fileType + "]";
+				+ ", fileType=" + fileType + ", resource=" + resource + "]";
 	}
 	
 	

@@ -1,102 +1,85 @@
- <nav class="navbar navbar-default navbar-fixed-top">
-              <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="">R-NOTIFY  </a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                 		</ul>
-                    </div>
-                </div>
-            </nav>
-      
-           
-        <div  class="jumbotron">
-			 <div class="container-fluid">       
-		           <div class="row" >
-                        <div class="col-md-8" >
-                            <div class="card">
-                                <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">R-NOTIFY  STATUS</h4>
-                                </div>
-                                <div class="card-content">
-                                      <div class="col-md-3">
-                                     <div class="card">
-                                      <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Dinner Table</h4>
-                                      <img  class="md-avatar" ng-src="assets/img/icons/dinnertable.png"/>
-                          			  </div>
-                       				 </div>
-                       				       <div class="col-md-3">
-                                     <div class="card">
-                                      <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Dinner Table</h4>
-                                      <img  class="md-avatar" ng-src="assets/img/icons/dinnertable.png"/>
-                          			  </div>
-                       				 </div>
-                       				       <div class="col-md-3">
-                                     <div class="card">
-                                      <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Dinner Table</h4>
-                                      <img  class="md-avatar" ng-src="assets/img/icons/dinnertable.png"/>
-                          			  </div>
-                       				 </div>
-                       				       <div class="col-md-3">
-                                     <div class="card">
-                                      <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Dinner Table</h4>
-                                      <img  class="md-avatar" ng-src="assets/img/icons/dinnertable.png"/>
-                          			  </div>
-                       				 </div>
-                                    <div class="col-md-3">
-                                     <div class="card">
-                                      <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Dinner Table</h4>
-                                      <img  class="md-avatar" ng-src="assets/img/icons/dinnertable.png"/>
-                          			  </div>
-                       				 </div>
-                                      <div class="col-md-3">
-                                     <div class="card">
-                                     <md-progress-linear  class="md-accent"></md-progress-linear>
-                                      <h4 class="title">Service</h4>
-                                       <img  class="md-avatar" ng-src="assets/img/icons/service.png"/>
-                          			  </div>
-                       				 </div>
-                       			
-                       
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="card">
-                          <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">Advertisement</h4>
-                                </div>
-                                <div class="card-content">
-                                  <video  autoplay loop class="img-responsive">
- 									 <source src={{adv.url}} type="video/mp4" />
-								   </video>
-								 
-                                </div>
-                            </div>
-                              <div class="card">
-                          <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">Advertisement</h4>
-                                </div>
-                                <div class="card-content">
-                                  <video  autoplay class="img-responsive">
- 									 <source src={{adv.url1}} type="video/mp4" />
-								   </video>
-								 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-	   </div>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#" ng-click="onLogoClick()">
+				<h4 class="navbar-text navbar-right">R-NOTIFY</h4> <img
+				src="assets/img/comp/logo.png" width="15%" height="10%"
+				class="img-responsive" />
+			</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<div class="jumbotron">
+	<div class="container-fluid">
+		<div class="row" ng-hide="noEvent"
+			ng-init="allVideoAdv()">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">R-NOTIFY STATUS</h4>
+					</div>
+					<div class="card-content">
+						<div class="col-md-3" ng-repeat="event in eventList">
+							<div class="card">
+								<md-progress-linear class={{event.colorCode}}></md-progress-linear>
+								<h4 class="title pull-center">{{event.linkedId}} |
+									{{event.serviceName}}</h4>
+								<img src={{event.clickStatusIcon}} width="25px">{{event.clickTime
+								| date:'HH:mm:ss'}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">Advertisement</h4>
+					</div>
+					<div class="card-content">
+						<div class="videogular-container">
+							<videogular vg-theme="video.theme.url" vg-responsive="true"
+								vg-auto-play="config.autoPlay"
+								vg-player-ready="onPlayerReady($API)"
+								vg-complete="onCompleteVideo()"> <vg-media
+								vg-src="config.sources" vg-tracks="config.tracks"> </vg-media> </videogular>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">FeedBack </h4>
+					</div>
+					<div class="card-content">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-12" ng-show="noEvent">
+
+			<div class="card-content">
+				<div class="videogular-container">
+					<videogular vg-theme="video.theme.url" vg-responsive="true"
+						vg-auto-play="config.autoPlay"
+						vg-player-ready="onPlayerReady($API)"
+						vg-complete="onCompleteVideo()"> <vg-media
+						vg-src="config.sources" vg-tracks="config.tracks"> </vg-media> </videogular>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

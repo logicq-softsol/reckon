@@ -10,9 +10,9 @@
 					method: 'POST',
 					url:AppConstants.hostName+AppConstants.loginURL,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
-					headers: {'Content-Type': 'application/json','AUTH-TOKEN': '' ,'userName':$scope.username ,'password':$scope.password} ,
+					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : ''
+					data :  $scope.userdetail
 				})
 			},
 			UpdateUser: function ($scope) {

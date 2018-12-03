@@ -2,15 +2,16 @@ package com.logicq.reckon.controller.helper;
 
 public enum EventIdentifier {
 
-	REQUEST, CANCEL;
+	REQUEST("REQUEST"), CANCEL("CANCEL"), DEFAULT("NORMAL");
 
-	public static EventIdentifier fromValue(Long value) {
-		if (value == 123l) {
-			return EventIdentifier.REQUEST;
-		} else {
-			return EventIdentifier.CANCEL;
-		}
+	private final String value;
+
+	EventIdentifier(String value) {
+		this.value = value;
 	}
-	
+
+	public String getvalue() {
+		return value;
+	}
 
 }

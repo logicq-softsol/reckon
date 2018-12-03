@@ -7,7 +7,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href=""> RECKON Dashboard </a>
+                        <img src="assets/img/comp/logo.png" width="15%" height="10%" class="img-responsive" />
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -144,15 +144,15 @@
                             <div class="card card-profile">
                                 <div class="card-avatar">
                                     <a href="">
-                                        <img class="img" src="assets/img/comp/logo.jpg" />
+                                        <img class="img" src="assets/img/comp/logo.png" />
                                     </a>
                                 </div>
                                 <div class="content">
-								   <h4 class="card-title">{{userdetail.compname}}</h4>
-                                    <h6 class="category text-gray">{{userdetail.tagline}}</h6>
+								   <h4 class="card-title">{{companyDetails.compname}}</h4>
+                                    <h6 class="category text-gray">{{companyDetails.tagline}}</h6>
                                     
                                     <p class="card-content">
-                                        {{userdetail.aboutcomp}}
+                                        {{companyDetails.aboutcomp}}
                                     </p>
                                     <a href="" data-toggle="modal" data-target="#updateprofile" ng-click="updateCompDetails()" class="btn btn-primary btn-round">Update</a>
                                 </div>
@@ -164,19 +164,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Product Name</label>
-                                                    <input type="text" class="form-control" disabled>
+                                                    <input type="text" class="form-control" ng-model="productDetails.productName" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">License To</label>
-                                                    <input type="text" class="form-control" disabled>
+                                                    <input type="text" class="form-control" ng-model="companyDetails.compname" disabled>
                                                 </div>
                                             </div>
 											 <div class="col-md-2">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Time</label>
-                                                    <input type="text" class="form-control" disabled>
+                                                    <input type="text" class="form-control" ng-model="productDetails.activateDate" disabled>
                                                 </div>
                                             </div>
                         </div>
@@ -201,13 +201,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Company Name</label>
-                                                    <input type="text" class="form-control" ng-model="userdetail.compname">
+                                                    <input type="text" class="form-control" ng-model="companyDetails.compname">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Tag Line</label>
-                                                    <input type="text" class="form-control" ng-model="userdetail.tagline">
+                                                    <input type="text" class="form-control" ng-model="companyDetails.tagline">
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">About Company</label>
-                                                    <input type="text" class="form-control" ng-model="userdetail.aboutcomp">
+                                                    <input type="text" class="form-control" ng-model="companyDetails.aboutcomp">
                                                 </div>
                                             </div>
                                         </div>

@@ -15,7 +15,7 @@
 					data : ''
 				})
 			},	
-			
+
 			SaveThreshold: function ($scope) {
 
 				return  $http({
@@ -31,12 +31,12 @@
 			DeleteThreshold: function ($scope) {
 
 				return  $http({
-					method: 'POST',
-					url:AppConstants.hostName+AppConstants.DeleteThresholdURL,
+					method: 'DELETE',
+					url:AppConstants.hostName+AppConstants.SaveThresholdURL+"/"+$scope.threshold.id,
 					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
 					headers: {'Content-Type': 'application/json'} ,
 					dataType :'json',
-					data : $scope.threshold
+					data :''
 				})
 			},
 		}

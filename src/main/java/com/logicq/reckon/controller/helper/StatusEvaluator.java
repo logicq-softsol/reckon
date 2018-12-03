@@ -1,16 +1,11 @@
 package com.logicq.reckon.controller.helper;
 
-import java.time.Duration;
-import java.time.Instant;
-
 import org.springframework.stereotype.Component;
-
-import com.logicq.reckon.vo.ServiceRequestVO;
 
 @Component
 public class StatusEvaluator {
 
-	public String getStatusCodeForTime(ServiceRequestVO serviceReq, Instant now) {
+	/*public String getStatusCodeForTime(ServiceRequestVO serviceReq, Instant now) {
 		Instant start = serviceReq.getRequestTime().toInstant();
 		Duration timeElapsed = Duration.between(start, now);
 		long time = timeElapsed.getSeconds();
@@ -26,6 +21,6 @@ public class StatusEvaluator {
 			return "SRC";
 		}
 
-	}
+	}*/
 
 }

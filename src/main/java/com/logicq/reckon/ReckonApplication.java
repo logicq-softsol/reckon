@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class ReckonApplication {
 
-	private int maxUploadSizeInMb = 10 * 1024 * 1024; // 10 MB
+	private int maxUploadSizeInMb = 50042327; // 10 MB
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReckonApplication.class, args);

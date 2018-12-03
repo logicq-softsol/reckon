@@ -2,7 +2,12 @@
 
 	angular.module('reckonApp').config(
 			function($stateProvider, $urlRouterProvider) {
-				$urlRouterProvider.otherwise("/login");
+				$urlRouterProvider.otherwise("/activate");
+				$stateProvider.state('activate', {
+					url : "/activate",
+					templateUrl : "assets/views/activation/productActivation.html",
+					controller : 'ProdctActivationController'
+				}),
 				$stateProvider.state('login', {
 					url : "/login",
 					templateUrl : "assets/views/login/login.html",

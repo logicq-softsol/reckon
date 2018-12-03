@@ -1,15 +1,12 @@
 package com.logicq.reckon.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,28 +14,25 @@ import javax.persistence.Table;
 public class Threshold implements Serializable{
 
 	@Id
-	@Column(name = "THRESHOLD_ID", nullable = false)
+	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long thresholdId;
+	private Long  id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "SECONDS")
-	private Long seconds;
+	@Column(name = "THRESHOLD_INTERVAL")
+	private Long interval;
 
 	@Column(name = "COLOR_CODE")
-	private String color;
+	private String colorCode;
 
-	 @ManyToMany(mappedBy = "thresholds")
-	private Set<ServiceDetails> services = new HashSet<>();
-
-	public Long getThresholdId() {
-		return thresholdId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setThresholdId(Long thresholdId) {
-		this.thresholdId = thresholdId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -49,30 +43,27 @@ public class Threshold implements Serializable{
 		this.name = name;
 	}
 
-	public Long getSeconds() {
-		return seconds;
+	public Long getInterval() {
+		return interval;
 	}
 
-	public void setSeconds(Long seconds) {
-		this.seconds = seconds;
+	public void setInterval(Long interval) {
+		this.interval = interval;
 	}
 
-	public String getColor() {
-		return color;
+	public String getColorCode() {
+		return colorCode;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColorCode(String colorCode) {
+		this.colorCode = colorCode;
 	}
 
-	public Set<ServiceDetails> getServices() {
-		return services;
+	@Override
+	public String toString() {
+		return "Threshold [id=" + id + ", name=" + name + ", interval=" + interval + ", colorCode=" + colorCode + "]";
 	}
 
-	public void setServices(Set<ServiceDetails> services) {
-		this.services = services;
-	}
-	 
-	 
-	
+
+
 }

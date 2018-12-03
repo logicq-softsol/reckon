@@ -15,7 +15,16 @@
 					data : ''
 				})
 			},		
-
+			GetAllEvents: function ($scope) {
+				return  $http({
+					method: 'GET',
+					url:AppConstants.hostName+AppConstants.EventsURL,
+					//url:AppConstants.hostName+AppConstants.hostPort+AppConstants.applicationName+AppConstants.loginURL,
+					headers: {'Content-Type': 'application/json'} ,
+					dataType :'json',
+					data : ''
+				})
+			},		
 		}
 		
 	}]);

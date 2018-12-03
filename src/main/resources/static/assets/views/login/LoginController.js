@@ -10,26 +10,35 @@
 			 'LoginService',
 			 function($scope,$rootScope,$location,$exceptionHandler,LoginService) {
 				 $scope.userdetail={};
+				 $scope.companyDetails={};
+				 $scope.productDetails={};
 				 $scope.userdetail.eventtext="Update profile";
 				 $scope.userdetail.profileprop=null;
+				 $scope.username='';
+				 $scope.password='';
 				 
 		$scope.login = function () {
+			 $scope.userdetail.username= $scope.username;
+			 $scope.userdetail.password= $scope.password;
 			LoginService.Login($scope).success(function(response, status, headers, config){
-				$scope.userdetail=response;
+				$scope.userdetail=response.userDetails;
+				$scope.companyDetails=response.companyDetails;
+				$scope.productDetails=response;
 				$location.path('/dashboard');
-				//$rootScope.busyTableDetails=response.tableDetails;
-				//$rootScope.$broadcast('loginTableDetails');
 			}).error(function(response, status) {
-				var errormsg='Unable to Login Check setting or Loging Details ';
-				 //$rootScope.$emit("callAddAlert", {type:'danger',msg:errormsg});
-				$exceptionHandler(errormsg);
 				$location.path('/login');
+				var errormsg='Unable to Login Check setting or Loging Details ';
+				$exceptionHandler(errormsg);
+				
 			});
     };
     
     $scope.displayProfile = function () {
     	LoginService.GetUserDetails($scope).success(function(response, status, headers, config){
-			$scope.userdetail=response;
+			$scope.userdetail=response.userDetails;
+			 $scope.companyDetails=response.companyDetails;
+			 $scope.productDetails=response;
+			 $scope.productDetails.activateDate=new Date(response.activateDate);
 			 $scope.userdetail.eventtext="Update profile";
 			 $scope.userdetail.profileprop=true;
 			
