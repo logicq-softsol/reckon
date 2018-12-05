@@ -1,23 +1,28 @@
 package com.logicq.reckon.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PRODUCT_ACTIVATION")
-public class ActivationDetails implements Serializable {
+@Table(name = "ACTIVATION_DETAILS")
+public class ActivationDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private Long id;
+
 	@Column(name = "ACTIVATION_KEY")
 	private String activationKey;
+	
+	@Column(name = "LISENCE_KEY")
+	private String licenseKey;
 
 	@Column(name = "PRODUCT_NAME")
 	private String productName;
@@ -27,101 +32,88 @@ public class ActivationDetails implements Serializable {
 
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
-	
+
 	@Column(name = "ACTIVATE_DATE")
-	private Date activateDate;
+	private Date activationDate;
 
 	@Column(name = "STATUS")
-	private boolean productStatus;
+	private String productStatus;
 
-	@OneToOne(cascade=CascadeType.ALL)  
-    @JoinColumn(name="USER_ID") 
-	private UserDetails userDetails;
+	@Column(name = "EXPIRY_DATE")
+	private Date expiryDate;
 
-	
-	@OneToOne(cascade=CascadeType.ALL)  
-    @JoinColumn(name="COMPANY_ID") 
-	private CompanyDetails companyDetails;
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getActivationKey() {
 		return activationKey;
 	}
 
-
 	public void setActivationKey(String activationKey) {
 		this.activationKey = activationKey;
 	}
-
 
 	public String getProductName() {
 		return productName;
 	}
 
-
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
 
 	public String getProductVersion() {
 		return productVersion;
 	}
 
-
 	public void setProductVersion(String productVersion) {
 		this.productVersion = productVersion;
 	}
-
 
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
-
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
-
-	public Date getActivateDate() {
-		return activateDate;
+	public Date getActivationDate() {
+		return activationDate;
 	}
 
-
-	public void setActivateDate(Date activateDate) {
-		this.activateDate = activateDate;
+	public void setActivationDate(Date activationDate) {
+		this.activationDate = activationDate;
 	}
 
-
-	public boolean isProductStatus() {
+	public String getProductStatus() {
 		return productStatus;
 	}
 
-
-	public void setProductStatus(boolean productStatus) {
+	public void setProductStatus(String productStatus) {
 		this.productStatus = productStatus;
 	}
 
-
-	public UserDetails getUserDetails() {
-		return userDetails;
+	public Date getExpiryDate() {
+		return expiryDate;
 	}
 
-
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetails = userDetails;
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 
-
-	public CompanyDetails getCompanyDetails() {
-		return companyDetails;
+	public String getLicenseKey() {
+		return licenseKey;
 	}
 
-
-	public void setCompanyDetails(CompanyDetails companyDetails) {
-		this.companyDetails = companyDetails;
+	public void setLicenseKey(String licenseKey) {
+		this.licenseKey = licenseKey;
 	}
 
+	
 	
 }

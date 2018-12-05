@@ -1,37 +1,39 @@
 package com.logicq.reckon;
 
-import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.logicq.reckon.vo.FileStorageProperties;
+
 @SpringBootApplication
+@EnableConfigurationProperties({ FileStorageProperties.class })
+@EnableAsync
 @EnableScheduling
-public class ReckonApplication {
+public class ReckonApplication extends SpringBootServletInitializer {
 
-	private int maxUploadSizeInMb = 50042327; // 10 MB
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(ReckonApplication.class);
+	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(ReckonApplication.class, args);
 	}
 
 	@Bean
-	public TomcatEmbeddedServletContainerFactory tomcatEmbedded() {
-
-		TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-
-		tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
-			if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
-				// -1 means unlimited
-				((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(maxUploadSizeInMb);
-			}
-		});
-
-		return tomcat;
-
+	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(mapper);
+		return converter;
 	}
-
 }

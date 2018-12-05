@@ -2,39 +2,31 @@ package com.logicq.reckon.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ENTITY_DETAILS")
-public class EntityDetails {
+@Table(name = "ENTITY")
+public class EntityDetails extends AttributeDetails {
 
-	@Column(name = "NAME")
-	private String name;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3043675769313534970L;
 
 	@Id
-	@Column(name = "ATTR_NAME")
-	private String attrName;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ENTITY_ID")
+	private Long entityId;
 
-	public String getName() {
-		return name;
+	public Long getEntityId() {
+		return entityId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAttrName() {
-		return attrName;
-	}
-
-	public void setAttrName(String attrName) {
-		this.attrName = attrName;
-	}
-
-	@Override
-	public String toString() {
-		return "EntityDetails [name=" + name + ", attrName=" + attrName + "]";
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
 	}
 
 }

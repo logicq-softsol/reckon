@@ -8,11 +8,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "COMPANY_DETAILS")
 public class CompanyDetails {
-	
+
 	@Id
 	@Column(name = "COMPANY_ID")
 	private String companyId;
-	
+
 	@Column(name = "COMP_NAME")
 	private String compname;
 
@@ -21,6 +21,9 @@ public class CompanyDetails {
 
 	@Column(name = "ABOUTCOMP", columnDefinition = "TEXT")
 	private String aboutcomp;
+
+	@Column(name = "LOGO_URL")
+	private String logoURL;
 
 	public String getCompanyId() {
 		return companyId;
@@ -54,11 +57,12 @@ public class CompanyDetails {
 		this.aboutcomp = aboutcomp;
 	}
 
-	@Override
-	public String toString() {
-		return "CompanyDetails [companyId=" + companyId + ", compname=" + compname + ", tagline=" + tagline
-				+ ", aboutcomp=" + aboutcomp + "]";
+	public String getLogoURL() {
+		return logoURL;
 	}
 
+	public void setLogoURL(String logoURL) {
+		this.logoURL = logoURL;
+	}
 
 }

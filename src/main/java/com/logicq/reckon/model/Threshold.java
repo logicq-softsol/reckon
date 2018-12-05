@@ -11,36 +11,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "THRESHOLD")
-public class Threshold implements Serializable{
+public class Threshold extends AttributeDetails implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1866318703798116218L;
 
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long  id;
+	private Long thresholdId;
 
-	@Column(name = "NAME")
-	private String name;
-
-	@Column(name = "THRESHOLD_INTERVAL")
+	@Column(name = "INTERVAL")
 	private Long interval;
 
 	@Column(name = "COLOR_CODE")
 	private String colorCode;
 
-	public Long getId() {
-		return id;
+	public Long getThresholdId() {
+		return thresholdId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setThresholdId(Long thresholdId) {
+		this.thresholdId = thresholdId;
 	}
 
 	public Long getInterval() {
@@ -58,12 +52,5 @@ public class Threshold implements Serializable{
 	public void setColorCode(String colorCode) {
 		this.colorCode = colorCode;
 	}
-
-	@Override
-	public String toString() {
-		return "Threshold [id=" + id + ", name=" + name + ", interval=" + interval + ", colorCode=" + colorCode + "]";
-	}
-
-
 
 }
