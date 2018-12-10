@@ -19,29 +19,40 @@ public class ServiceDetails extends AttributeDetails implements Serializable {
 	private static final long serialVersionUID = 216015083415993815L;
 
 	@Id
-	@Column(name = "SERVICE_ID", nullable = false)
+	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long serviceId;
+	private Long id;
 
-	@Column(name = "CODE")
-	private Long serviceCode;
+	@Column(name = "SERVICE_ID", nullable = false)
+	private String serviceId;
 
-	@Column(name = "ICON")
+	@Column(name = "SERVICE_CODE", nullable = false)
+	private String serviceCode;
+
+	@Column(name = "SERVICE_CODE_ICON")
 	private String iconUrl;
 
-	public Long getServiceId() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(Long serviceId) {
+	public void setServiceId(String serviceId) {
 		this.serviceId = serviceId;
 	}
 
-	public Long getServiceCode() {
+	public String getServiceCode() {
 		return serviceCode;
 	}
 
-	public void setServiceCode(Long serviceCode) {
+	public void setServiceCode(String serviceCode) {
 		this.serviceCode = serviceCode;
 	}
 
