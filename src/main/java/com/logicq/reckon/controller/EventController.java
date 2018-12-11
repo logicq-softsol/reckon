@@ -21,9 +21,7 @@ public class EventController {
 
 	@RequestMapping(value = "/clicked", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EventDetails> clickedEvent(@RequestBody EventDetails eventDetails) {
-
 		eventDetailsRepo.save(eventDetails);
-
 		return new ResponseEntity<EventDetails>(eventDetails, HttpStatus.OK);
 	}
 

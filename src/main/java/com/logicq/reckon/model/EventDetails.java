@@ -5,17 +5,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CLICK_EVENT_DETAILS")
-public class EventDetails implements Serializable{
+public class EventDetails implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -158545868879946412L;
 
+	@Id
 	@Column(name = "SERVICE_CODE", nullable = false)
 	private String serviceCode;
 

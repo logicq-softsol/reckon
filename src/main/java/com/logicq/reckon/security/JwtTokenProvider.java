@@ -24,10 +24,10 @@ public class JwtTokenProvider {
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-	@Value("${eazdine.jwtSecret}")
+	@Value("${reckon.jwtSecret}")
 	private String jwtSecret;
 
-	@Value("${eazdine.jwtExpirationInMs}")
+	@Value("${reckon.jwtExpirationInMs}")
 	private int jwtExpirationInMs;
 
 	public String generateToken(Authentication authentication) {

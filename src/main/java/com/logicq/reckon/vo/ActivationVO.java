@@ -1,14 +1,12 @@
 package com.logicq.reckon.vo;
 
-import java.util.Date;
-
 public class ActivationVO {
 
 	private String productName;
 	private String productVersion;
-	private Date activationDate;
+	private String activationDate;
 	private String productStatus;
-	private Date expiryDate;
+	private String expiryDate;
 	private String license;
 	private UserVO user;
 
@@ -28,28 +26,12 @@ public class ActivationVO {
 		this.productVersion = productVersion;
 	}
 
-	public Date getActivationDate() {
-		return activationDate;
-	}
-
-	public void setActivationDate(Date activationDate) {
-		this.activationDate = activationDate;
-	}
-
 	public String getProductStatus() {
 		return productStatus;
 	}
 
 	public void setProductStatus(String productStatus) {
 		this.productStatus = productStatus;
-	}
-
-	public Date getExpiryDate() {
-		return expiryDate;
-	}
-
-	public void setExpiryDate(Date expiryDate) {
-		this.expiryDate = expiryDate;
 	}
 
 	public String getLicense() {
@@ -67,7 +49,23 @@ public class ActivationVO {
 	public void setUser(UserVO user) {
 		this.user = user;
 	}
-	
-	
 
+	public String getActivationDate() {
+		return activationDate;
+	}
+
+	public void setActivationDate(String activationDate) {
+		this.activationDate = activationDate;
+	}
+
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	
+	
 }

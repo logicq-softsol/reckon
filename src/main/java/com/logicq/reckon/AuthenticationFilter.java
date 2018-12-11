@@ -32,9 +32,7 @@ import com.logicq.reckon.service.LoginService;
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class AuthenticationFilter extends OncePerRequestFilter {
 
-	private final List<String> allowedOrigins = Arrays.asList("http://127.0.0.1:4200", "http://localhost:4200",
-			"http://101.53.144.190:8080", "http://localhost:8100", "http://127.0.0.1:8100", "http://localhost:8101",
-			"http://192.168.0.103:8100");
+	private final List<String> allowedOrigins = Arrays.asList("http://127.0.0.1:4200", "http://localhost:4200","http://localhost:8080","http://127.0.0.1:8080");
 
 	@Autowired
 	private JwtTokenProvider tokenProvider;

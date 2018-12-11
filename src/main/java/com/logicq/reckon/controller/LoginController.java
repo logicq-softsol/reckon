@@ -64,7 +64,7 @@ public class LoginController {
 		if (null != activateDetails && !StringUtils.isEmpty(activateDetails.getLicense())
 				&& !StringUtils.isEmpty(activateDetails.getUser().getUserName())) {
 			ActivationDetails activationDetails = new ActivationDetails();
-			activationDetails.setActivationDate(reckonDateUtils.currentDate());
+			activationDetails.setActivationDate(reckonDateUtils.currentDateWithString());
 			activationDetails.setActivationKey(passwordEncoder.encode(activateDetails.getLicense()));
 			activationDetails.setLicenseKey(activateDetails.getLicense());
 			activationDetails.setExpiryDate(activateDetails.getExpiryDate());

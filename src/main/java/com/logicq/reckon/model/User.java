@@ -31,6 +31,9 @@ public class User implements Serializable {
 	@Column(name = "FIRST_NAME")
 	private String firstname;
 
+	@Column(name = "MIDDLE_NAME")
+	private String middlename;
+
 	@Column(name = "LAST_NAME")
 	private String lastname;
 
@@ -52,7 +55,6 @@ public class User implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -60,8 +62,6 @@ public class User implements Serializable {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
-	
 
 	public String getUserName() {
 		return userName;
@@ -133,6 +133,14 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getMiddlename() {
+		return middlename;
+	}
+
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
 	}
 
 }
