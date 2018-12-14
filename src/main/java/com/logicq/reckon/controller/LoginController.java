@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.logicq.reckon.exception.SucessMessage;
 import com.logicq.reckon.model.ActivationDetails;
+import com.logicq.reckon.model.EntityDetails;
 import com.logicq.reckon.model.LoginDetails;
 import com.logicq.reckon.model.User;
 import com.logicq.reckon.repository.LoginDetailsRepo;
@@ -183,5 +184,23 @@ public class LoginController {
 
 		return new ResponseEntity<SucessMessage>(
 				new SucessMessage(reckonDateUtils.currentDate(), "Invalid login", "ERROR"), HttpStatus.BAD_REQUEST);
+	}
+
+	@RequestMapping(value = "/validateProduct", method = RequestMethod.GET)
+	public ResponseEntity<SucessMessage> checkProductValidity() {
+
+		List<ActivationDetails> activationList = productActivationRepo.findAll();
+		if (null != activationList && activationList.size() > 1) {
+			return new ResponseEntity<SucessMessage>(
+					new SucessMessage(reckonDateUtils.currentDate(), "Product Register Multipule time", "ERROR"),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		if (null != activationList && activationList.size() == 1) {
+			return new ResponseEntity<SucessMessage>(
+					new SucessMessage(reckonDateUtils.currentDate(), "Product Register", "SUCESS"), HttpStatus.OK);
+		}
+		return new ResponseEntity<SucessMessage>(
+				new SucessMessage(reckonDateUtils.currentDate(), "Product Not Register", "NO_LICENSE"), HttpStatus.OK);
 	}
 }
