@@ -1,5 +1,7 @@
 package com.logicq.reckon.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,16 +31,16 @@ public class ActivationDetails {
 	private String productVersion;
 
 	@Column(name = "LAST_UPDATE")
-	private String lastUpdate;
+	private Date lastUpdate;
 
 	@Column(name = "ACTIVATE_DATE")
-	private String activationDate;
+	private Date activationDate;
 
 	@Column(name = "STATUS")
 	private String productStatus;
 
 	@Column(name = "EXPIRY_DATE")
-	private String expiryDate;
+	private Date expiryDate;
 
 	public Long getId() {
 		return id;
@@ -54,6 +56,14 @@ public class ActivationDetails {
 
 	public void setActivationKey(String activationKey) {
 		this.activationKey = activationKey;
+	}
+
+	public String getLicenseKey() {
+		return licenseKey;
+	}
+
+	public void setLicenseKey(String licenseKey) {
+		this.licenseKey = licenseKey;
 	}
 
 	public String getProductName() {
@@ -72,6 +82,22 @@ public class ActivationDetails {
 		this.productVersion = productVersion;
 	}
 
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public Date getActivationDate() {
+		return activationDate;
+	}
+
+	public void setActivationDate(Date activationDate) {
+		this.activationDate = activationDate;
+	}
+
 	public String getProductStatus() {
 		return productStatus;
 	}
@@ -80,37 +106,14 @@ public class ActivationDetails {
 		this.productStatus = productStatus;
 	}
 
-	public String getLicenseKey() {
-		return licenseKey;
-	}
-
-	public void setLicenseKey(String licenseKey) {
-		this.licenseKey = licenseKey;
-	}
-
-	public String getLastUpdate() {
-		return lastUpdate;
-	}
-
-	public void setLastUpdate(String lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public String getActivationDate() {
-		return activationDate;
-	}
-
-	public void setActivationDate(String activationDate) {
-		this.activationDate = activationDate;
-	}
-
-	public String getExpiryDate() {
+	public Date getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(String expiryDate) {
+	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
+	
 	
 	
 

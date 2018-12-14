@@ -1,5 +1,8 @@
 package com.logicq.reckon.controller;
 
+import java.util.List;
+
+import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 
@@ -29,6 +32,7 @@ import com.logicq.reckon.repository.UserDetailsRepo;
 import com.logicq.reckon.security.JwtTokenProvider;
 import com.logicq.reckon.utils.ReckonDateUtils;
 import com.logicq.reckon.vo.ActivationVO;
+import com.logicq.reckon.vo.RecoverVO;
 
 @RestController
 @EnableAutoConfiguration
@@ -61,10 +65,23 @@ public class LoginController {
 
 	@RequestMapping(value = "/activateProduct", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SucessMessage> registerPartner(@RequestBody ActivationVO activateDetails) throws Exception {
-		if (null != activateDetails && !StringUtils.isEmpty(activateDetails.getLicense())
+
+		List<ActivationDetails> activationList = productActivationRepo.findAll();
+		if (null != activationList && activationList.size() > 1) {
+			return new ResponseEntity<SucessMessage>(
+					new SucessMessage(reckonDateUtils.currentDate(), "Product Register Multipule time", "ERROR"),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		if (null != activationList && activationList.size() == 1) {
+			return new ResponseEntity<SucessMessage>(
+					new SucessMessage(reckonDateUtils.currentDate(), "Product Register", "SUCESS"), HttpStatus.OK);
+		}
+
+		if (null == activationList && null != activateDetails && !StringUtils.isEmpty(activateDetails.getLicense())
 				&& !StringUtils.isEmpty(activateDetails.getUser().getUserName())) {
 			ActivationDetails activationDetails = new ActivationDetails();
-			activationDetails.setActivationDate(reckonDateUtils.currentDateWithString());
+			activationDetails.setActivationDate(reckonDateUtils.currentDate());
 			activationDetails.setActivationKey(passwordEncoder.encode(activateDetails.getLicense()));
 			activationDetails.setLicenseKey(activateDetails.getLicense());
 			activationDetails.setExpiryDate(activateDetails.getExpiryDate());
@@ -82,6 +99,7 @@ public class LoginController {
 			userDetails.setLastname(activateDetails.getUser().getLastname());
 			userDetails.setMobileno(activateDetails.getUser().getMobileno());
 			userDetails.setPostalcode(activateDetails.getUser().getPostalcode());
+			userDetails.setActivationKey(activationDetails.getActivationKey());
 
 			LoginDetails loginDetails = new LoginDetails();
 			loginDetails.setLoginStatus("IN_ACTIVE");
@@ -93,12 +111,12 @@ public class LoginController {
 			loginDetailsRepo.save(loginDetails);
 
 			return new ResponseEntity<SucessMessage>(
-					new SucessMessage(reckonDateUtils.currentDate(), "SUCESS", "Product Register Sucessfully"),
+					new SucessMessage(reckonDateUtils.currentDate(), "Product Register Sucessfully", "SUCESS"),
 					HttpStatus.OK);
 		}
 
 		return new ResponseEntity<SucessMessage>(
-				new SucessMessage(reckonDateUtils.currentDate(), "ERROR", "Unable to Register Product"),
+				new SucessMessage(reckonDateUtils.currentDate(), "Unable to Register Product", "ERROR"),
 				HttpStatus.EXPECTATION_FAILED);
 	}
 
@@ -143,4 +161,27 @@ public class LoginController {
 				new SucessMessage(reckonDateUtils.currentDate(), "Unable to logout ", "ERROR"), HttpStatus.BAD_REQUEST);
 	}
 
+	@RequestMapping(value = "/recoverAccount", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SucessMessage> recoverAccount(@RequestBody RecoverVO recover) throws Exception {
+		ActivationDetails activationDetail = productActivationRepo
+				.findByActivationKey(passwordEncoder.encode(recover.getLicenseKey()));
+		if (null != activationDetail) {
+			if (passwordEncoder.matches(recover.getLicenseKey(), activationDetail.getActivationKey())) {
+				User user = userDetailsRepo.findByActivationKeyAndUserName(activationDetail.getActivationKey(),
+						recover.getUserName());
+				if (null != user) {
+					LoginDetails loginDetails = loginDetailsRepo.findByUserName(user.getUserName());
+					loginDetails.setPassword(passwordEncoder.encode(recover.getNewPassword()));
+					loginDetailsRepo.save(loginDetails);
+					return new ResponseEntity<SucessMessage>(
+							new SucessMessage(reckonDateUtils.currentDate(), "Password Change SucessFully", "SUCESS"),
+							HttpStatus.OK);
+				}
+
+			}
+		}
+
+		return new ResponseEntity<SucessMessage>(
+				new SucessMessage(reckonDateUtils.currentDate(), "Invalid login", "ERROR"), HttpStatus.BAD_REQUEST);
+	}
 }

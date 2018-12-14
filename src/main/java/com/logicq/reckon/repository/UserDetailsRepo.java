@@ -12,4 +12,6 @@ public interface UserDetailsRepo extends JpaRepository<User, Long> {
 
 	User findByUserName(String userName);
 
+	User findByActivationKeyAndUserName(String activationKey, String userName);
+
 }

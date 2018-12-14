@@ -55,6 +55,9 @@ public class User implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "ACTIVATION_KEY")
+	private String activationKey;
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -141,6 +144,14 @@ public class User implements Serializable {
 
 	public void setMiddlename(String middlename) {
 		this.middlename = middlename;
+	}
+
+	public String getActivationKey() {
+		return activationKey;
+	}
+
+	public void setActivationKey(String activationKey) {
+		this.activationKey = activationKey;
 	}
 
 }
