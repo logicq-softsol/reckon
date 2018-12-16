@@ -68,18 +68,18 @@ public class LoginController {
 	public ResponseEntity<SucessMessage> registerPartner(@RequestBody ActivationVO activateDetails) throws Exception {
 
 		List<ActivationDetails> activationList = productActivationRepo.findAll();
-		if (null != activationList && activationList.size() > 1) {
+		if (activationList.size() > 1) {
 			return new ResponseEntity<SucessMessage>(
 					new SucessMessage(reckonDateUtils.currentDate(), "Product Register Multipule time", "ERROR"),
 					HttpStatus.BAD_REQUEST);
 		}
 
-		if (null != activationList && activationList.size() == 1) {
+		if (activationList.size() == 1) {
 			return new ResponseEntity<SucessMessage>(
 					new SucessMessage(reckonDateUtils.currentDate(), "Product Register", "SUCESS"), HttpStatus.OK);
 		}
 
-		if (null == activationList && null != activateDetails && !StringUtils.isEmpty(activateDetails.getLicense())
+		if (activationList.isEmpty() && !StringUtils.isEmpty(activateDetails.getLicense())
 				&& !StringUtils.isEmpty(activateDetails.getUser().getUserName())) {
 			ActivationDetails activationDetails = new ActivationDetails();
 			activationDetails.setActivationDate(reckonDateUtils.currentDate());
@@ -202,5 +202,14 @@ public class LoginController {
 		}
 		return new ResponseEntity<SucessMessage>(
 				new SucessMessage(reckonDateUtils.currentDate(), "Product Not Register", "NO_LICENSE"), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/load", method = RequestMethod.GET)
+	public ResponseEntity<User> loadUserDetails() {
+		if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			String userName = tokenProvider.getUserIdFromJWT(tokenProvider.getJwtFromRequest(context));
+			return new ResponseEntity<User>(userDetailsRepo.findByUserName(userName), HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(new User(), HttpStatus.BAD_REQUEST);
 	}
 }
